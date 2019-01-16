@@ -33,6 +33,7 @@ buildscript {
         rxAndroidVersion = '2.1.0'
         rxlifecycleVersion = '3.0.0'
         materialDialogsVersion = '2.0.0-rc7'
+        loggerVersion = "2.2.0"
     }
     repositories {
         google()
