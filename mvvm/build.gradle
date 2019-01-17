@@ -53,4 +53,6 @@ dependencies {
     api "com.trello.rxlifecycle3:rxlifecycle-components:$rootProject.rxlifecycleVersion"
     api "com.afollestad.material-dialogs:core:$rootProject.materialDialogsVersion"
     api "com.orhanobut:logger:$rootProject.loggerVersion"
+
+    api "com.jakewharton.rxbinding3:rxbinding-core:$rootProject.rxbindingVersion"
 }

@@ -3,9 +3,8 @@ package com.zhuzichu.nice
 
 import android.os.Bundle
 import android.view.View
-import com.zhuzichu.mvvm.BaseFragment
+import com.zhuzichu.mvvm.base.BaseFragment
 import com.zhuzichu.nice.databinding.FragmentContainerBinding
-import kotlinx.android.synthetic.main.fragment_container.*
 
 class ContainerFragment : BaseFragment<FragmentContainerBinding, ContainerViewModel>() {
     override fun bindVariableId(): Int {
@@ -17,6 +16,6 @@ class ContainerFragment : BaseFragment<FragmentContainerBinding, ContainerViewMo
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        button.setOnClickListener { navigate(R.id.action_fragment_container_to_fragment_detail) }
+        super.onViewCreated(view, savedInstanceState)
     }
 }

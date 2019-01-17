@@ -1,7 +1,7 @@
 package com.zhuzichu.nice
 
 
-import com.zhuzichu.mvvm.BaseFragment
+import com.zhuzichu.mvvm.base.BaseFragment
 import com.zhuzichu.nice.databinding.FragmentDetailBinding
 
 /**
