@@ -20,6 +20,12 @@
         <attr name="onTouchCommand" />
         <attr name="isThrottleFirst" />
         <attr name="currentView" />
-
     </declare-styleable>
+
+    <declare-styleable name="ImageView">
+        <!--  load bitmap from uri(string type) -->
+        <attr name="url" />
+        <attr name="placeholderRes" format="reference|color" />
+    </declare-styleable>
+
 </resources>

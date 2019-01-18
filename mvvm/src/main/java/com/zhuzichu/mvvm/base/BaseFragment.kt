@@ -74,11 +74,11 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
                 bundle?.let {
                     intent.putExtras(it)
                 }
-//                if (options != null) {
-//                    startActivity(intent, options)
-//                } else {
-                activity?.startActivity(intent)
-//                }
+                if (options != null) {
+                    startActivity(intent, options)
+                } else {
+                    startActivity(intent)
+                }
                 if (isPop == true) {
                     activity?.finish()
                 }

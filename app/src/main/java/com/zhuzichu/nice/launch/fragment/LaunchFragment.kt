@@ -17,4 +17,5 @@ class LaunchFragment : BaseFragment<FragmentLaunchBinding, LaunchViewModel>() {
     override fun bindVariableId(): Int {
         return BR.viewModel
     }
+
 }
