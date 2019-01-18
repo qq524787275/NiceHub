@@ -28,4 +28,9 @@
         <attr name="placeholderRes" format="reference|color" />
     </declare-styleable>
 
+
+    <declare-styleable name="JumpView">
+        <attr name="period" format="integer" />
+        <attr name="time" format="integer" />
+    </declare-styleable>
 </resources>

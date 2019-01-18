@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -20,8 +21,9 @@
             android:scaleType="centerCrop"
             app:url="@{viewModel.urls[0]}" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="70dp"
+        <com.zhuzichu.nice.widget.JumpView
+            android:id="@+id/jump"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
@@ -29,10 +31,13 @@
             android:layout_marginBottom="40dp"
             android:background="@drawable/shape_jump"
             android:gravity="center"
-            android:text="跳过"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:textColor="#fff"
             android:textSize="16sp"
-            android:visibility="visible"
-            app:onClickCommand="@{viewModel.jump}" />
+            android:visibility="gone"
+            app:onClickCommand="@{viewModel.jump}"
+            tools:text="跳过"
+            tools:visibility="visible" />
     </RelativeLayout>
 </layout>

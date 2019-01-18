@@ -24,9 +24,9 @@ import com.zhuzichu.mvvm.R
  * Created by wb.zhuzichu18 on 2019/1/15.
  */
 abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragment(), IBaseFragment {
-    private lateinit var mBind: V
-    private lateinit var mViewModel: VM
-    private lateinit var mHandler: Handler
+    lateinit var mBind: V
+    lateinit var mViewModel: VM
+    lateinit var mHandler: Handler
     private var mDialog: MaterialDialog? = null
     abstract fun setLayoutId(): Int
     abstract fun bindVariableId(): Int
@@ -126,4 +126,5 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
     override fun onEnterAnimationEnd(savedInstanceState: Bundle?) {
         mViewModel.onEnterAnimationEnd()
     }
+
 }
