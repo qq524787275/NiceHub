@@ -12,9 +12,5 @@ import com.zhuzichu.mvvm.binding.viewadapter.command.BindingCommand
 class LoginViewModel(application: Application) : BaseViewModel(application) {
 
 
-    val login: BindingCommand<View> = BindingCommand(object : BindingAction {
-        override fun call() {
-            val a=10/0;
-        }
-    })
+    val login: BindingCommand<View> = BindingCommand(BindingAction { val a=10/0; })
 }

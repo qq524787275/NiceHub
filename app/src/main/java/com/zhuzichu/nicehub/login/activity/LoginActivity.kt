@@ -7,7 +7,5 @@ import com.zhuzichu.nicehub.R
  * Created by wb.zhuzichu18 on 2019/1/17.
  */
 class LoginActivity : BaseActivity() {
-    override fun setNavGraph(): Int {
-        return R.navigation.login_navigation
-    }
+    override fun setNavGraph(): Int = R.navigation.login_navigation
 }

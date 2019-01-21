@@ -7,7 +7,5 @@ import com.zhuzichu.nicehub.R
  * Created by wb.zhuzichu18 on 2019/1/17.
  */
 class LaunchActivity : BaseActivity() {
-    override fun setNavGraph(): Int {
-        return R.navigation.launch_navigation
-    }
+    override fun setNavGraph(): Int = R.navigation.launch_navigation
 }

@@ -11,10 +11,8 @@ import com.zhuzichu.mvvm.binding.viewadapter.command.BindingCommand
  */
 class ContainerViewModel(application: Application) : BaseViewModel(application) {
 
-    val goDetailFragment: BindingCommand<View> = BindingCommand(object : BindingAction {
-        override fun call() {
-//            Integer.parseInt("goldze")
-            startFragment(action = R.id.action_containerFragment_to_detailFragment)
-        }
+    val goDetailFragment: BindingCommand<View> = BindingCommand(BindingAction {
+        //            Integer.parseInt("goldze")
+        startFragment(action = R.id.action_containerFragment_to_detailFragment)
     })
 }

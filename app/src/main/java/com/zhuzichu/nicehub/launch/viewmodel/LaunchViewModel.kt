@@ -17,12 +17,9 @@ class LaunchViewModel(application: Application) : BaseViewModel(application) {
 
     var urls: ObservableField<Array<String>> = ObservableField(TRANSITION_URLS)
 
-    val jump: BindingCommand<View> = BindingCommand(object : BindingAction {
-        override fun call() {
-            var options = ActivityOptionsCompat.makeCustomAnimation(getApplication(), R.anim.screen_zoom_in, R.anim.screen_zoom_out).toBundle()
-            startActivity(LoginActivity::class.java, isPop = true, options = options)
-
-        }
+    val jump: BindingCommand<View> = BindingCommand(BindingAction {
+        var options = ActivityOptionsCompat.makeCustomAnimation(getApplication(), R.anim.screen_zoom_in, R.anim.screen_zoom_out).toBundle()
+        startActivity(LoginActivity::class.java, isPop = true, options = options)
     })
 
     companion object {
