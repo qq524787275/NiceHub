@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.zhuzichu.nice.login.viewmodel.LoginViewModel" />
+            type="com.zhuzichu.nicehub.login.viewmodel.LoginViewModel" />
     </data>
 
     <LinearLayout
@@ -13,5 +14,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+       <EditText
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:hint="请输入用户名"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:onClickCommand="@{viewModel.login}"
+            android:text="登录"/>
     </LinearLayout>
 </layout>

@@ -1,10 +1,10 @@
-package com.zhuzichu.nice.login.fragment
+package com.zhuzichu.nicehub.login.fragment
 
 import com.zhuzichu.mvvm.base.BaseFragment
-import com.zhuzichu.nice.BR
-import com.zhuzichu.nice.R
-import com.zhuzichu.nice.databinding.FragmentLoginBinding
-import com.zhuzichu.nice.login.viewmodel.LoginViewModel
+import com.zhuzichu.nicehub.BR
+import com.zhuzichu.nicehub.R
+import com.zhuzichu.nicehub.databinding.FragmentLoginBinding
+import com.zhuzichu.nicehub.login.viewmodel.LoginViewModel
 
 /**
  * Created by wb.zhuzichu18 on 2019/1/17.

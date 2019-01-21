@@ -1,16 +1,15 @@
-package com.zhuzichu.nice.widget
+package com.zhuzichu.nicehub.widget
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
-import com.orhanobut.logger.Logger
 import com.zhuzichu.mvvm.base.IBaseView
 import com.zhuzichu.mvvm.utils.RxUtils
+import com.zhuzichu.nicehub.R
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import java.util.concurrent.TimeUnit
-import com.zhuzichu.nice.R
 
 /**
  * Created by wb.zhuzichu18 on 2019/1/18.
@@ -39,13 +38,16 @@ class JumpView @JvmOverloads constructor(
 
     override fun onStart() {
         super.onStart()
-        subscribe = Observable.interval(period.toLong(), TimeUnit.SECONDS)
+        subscribe = Observable.interval(
+                period.toLong(), TimeUnit.SECONDS)
                 .compose(RxUtils.schedulersTransformer())
-                .subscribe { l ->
-                    Logger.i(l.toString())
+                .doOnSubscribe {
                     visibility = View.VISIBLE
-                    text = s
-                    if (l == time.toLong()) {
+                    text=String.format(s,time)
+                }
+                .subscribe {
+                    text = String.format(s, time.toLong().minus(it as Long)-1)
+                    if (it == time.toLong()-1) {
                         if (::listener.isInitialized) {
                             listener()
                         }

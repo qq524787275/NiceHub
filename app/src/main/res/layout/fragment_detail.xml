@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.zhuzichu.nice.DetailViewModel" />
+            type="com.zhuzichu.nicehub.DetailViewModel" />
     </data>
 
     <RelativeLayout

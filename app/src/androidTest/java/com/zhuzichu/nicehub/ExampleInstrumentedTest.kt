@@ -1,4 +1,4 @@
-package com.zhuzichu.nice
+package com.zhuzichu.nicehub
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4

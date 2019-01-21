@@ -10,7 +10,7 @@ android {
         enabled = true
     }
     defaultConfig {
-        applicationId "com.zhuzichu.nice"
+        applicationId "com.zhuzichu.nicehub"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1

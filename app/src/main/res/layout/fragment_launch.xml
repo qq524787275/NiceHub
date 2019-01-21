@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.zhuzichu.nice.launch.viewmodel.LaunchViewModel" />
+            type="com.zhuzichu.nicehub.launch.viewmodel.LaunchViewModel" />
 
     </data>
 
@@ -21,7 +21,7 @@
             android:scaleType="centerCrop"
             app:url="@{viewModel.urls[0]}" />
 
-        <com.zhuzichu.nice.widget.JumpView
+        <com.zhuzichu.nicehub.widget.JumpView
             android:id="@+id/jump"
             android:layout_width="wrap_content"
             android:layout_height="30dp"

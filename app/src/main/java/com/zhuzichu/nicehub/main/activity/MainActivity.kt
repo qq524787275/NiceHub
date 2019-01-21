@@ -1,8 +1,8 @@
-package com.zhuzichu.nice.main.activity
+package com.zhuzichu.nicehub.main.activity
 
 
 import com.zhuzichu.mvvm.base.BaseActivity
-import com.zhuzichu.nice.R
+import com.zhuzichu.nicehub.R
 
 class MainActivity : BaseActivity() {
     override fun setNavGraph(): Int {

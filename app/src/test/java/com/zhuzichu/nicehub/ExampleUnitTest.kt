@@ -1,4 +1,4 @@
-package com.zhuzichu.nice
+package com.zhuzichu.nicehub
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.zhuzichu.nice.launch.viewmodel
+package com.zhuzichu.nicehub.launch.viewmodel
 
 import android.app.Application
 import android.view.View
@@ -7,8 +7,8 @@ import androidx.databinding.ObservableField
 import com.zhuzichu.mvvm.base.BaseViewModel
 import com.zhuzichu.mvvm.binding.viewadapter.command.BindingAction
 import com.zhuzichu.mvvm.binding.viewadapter.command.BindingCommand
-import com.zhuzichu.nice.login.activity.LoginActivity
-import com.zhuzichu.nice.R
+import com.zhuzichu.nicehub.R
+import com.zhuzichu.nicehub.login.activity.LoginActivity
 
 /**
  * Created by wb.zhuzichu18 on 2019/1/17.
@@ -21,6 +21,7 @@ class LaunchViewModel(application: Application) : BaseViewModel(application) {
         override fun call() {
             var options = ActivityOptionsCompat.makeCustomAnimation(getApplication(), R.anim.screen_zoom_in, R.anim.screen_zoom_out).toBundle()
             startActivity(LoginActivity::class.java, isPop = true, options = options)
+
         }
     })
 

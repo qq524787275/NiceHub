@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/launchFragment"
-        android:name="com.zhuzichu.nice.launch.fragment.LaunchFragment"
+        android:name="com.zhuzichu.nicehub.launch.fragment.LaunchFragment"
         android:label="LaunchFragment"
         tools:layout="@layout/fragment_launch" />
 </navigation>

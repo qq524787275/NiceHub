@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.zhuzichu.nice.ContainerViewModel" />
+            type="com.zhuzichu.nicehub.ContainerViewModel" />
     </data>
 
     <LinearLayout

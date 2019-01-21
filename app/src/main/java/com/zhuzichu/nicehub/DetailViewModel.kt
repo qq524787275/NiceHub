@@ -1,4 +1,4 @@
-package com.zhuzichu.nice
+package com.zhuzichu.nicehub
 
 import android.app.Application
 import com.zhuzichu.mvvm.base.BaseViewModel

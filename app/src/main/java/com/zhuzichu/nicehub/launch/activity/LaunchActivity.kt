@@ -1,7 +1,7 @@
-package com.zhuzichu.nice.launch.activity
+package com.zhuzichu.nicehub.launch.activity
 
 import com.zhuzichu.mvvm.base.BaseActivity
-import com.zhuzichu.nice.R
+import com.zhuzichu.nicehub.R
 
 /**
  * Created by wb.zhuzichu18 on 2019/1/17.

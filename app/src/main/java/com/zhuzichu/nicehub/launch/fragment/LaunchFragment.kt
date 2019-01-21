@@ -1,12 +1,12 @@
-package com.zhuzichu.nice.launch.fragment
+package com.zhuzichu.nicehub.launch.fragment
 
 import android.os.Bundle
 import android.view.View
 import com.zhuzichu.mvvm.base.BaseFragment
-import com.zhuzichu.nice.BR
-import com.zhuzichu.nice.databinding.FragmentLaunchBinding
-import com.zhuzichu.nice.launch.viewmodel.LaunchViewModel
-import com.zhuzichu.nice.R
+import com.zhuzichu.nicehub.BR
+import com.zhuzichu.nicehub.databinding.FragmentLaunchBinding
+import com.zhuzichu.nicehub.launch.viewmodel.LaunchViewModel
+import com.zhuzichu.nicehub.R
 import kotlinx.android.synthetic.main.fragment_launch.*
 
 /**

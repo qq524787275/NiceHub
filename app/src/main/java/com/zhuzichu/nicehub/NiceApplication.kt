@@ -1,10 +1,10 @@
-package com.zhuzichu.nice
+package com.zhuzichu.nicehub
 
 import android.app.Application
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.zhuzichu.mvvm.crash.CaocConfig
-import com.zhuzichu.nice.main.activity.MainActivity
+import com.zhuzichu.nicehub.main.activity.MainActivity
 
 
 /**

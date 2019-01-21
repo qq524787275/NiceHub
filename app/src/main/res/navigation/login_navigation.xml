@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.zhuzichu.nice.login.fragment.LoginFragment"
+        android:name="com.zhuzichu.nicehub.login.fragment.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_launch" />
+        tools:layout="@layout/fragment_login" />
 </navigation>

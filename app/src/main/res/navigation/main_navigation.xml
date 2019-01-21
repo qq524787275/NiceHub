@@ -6,7 +6,7 @@
     app:startDestination="@id/containerFragment">
     <fragment
         android:id="@+id/containerFragment"
-        android:name="com.zhuzichu.nice.ContainerFragment"
+        android:name="com.zhuzichu.nicehub.ContainerFragment"
         android:label="fragment_container"
         tools:layout="@layout/fragment_container">
 
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.zhuzichu.nice.DetailFragment"
+        android:name="com.zhuzichu.nicehub.DetailFragment"
         android:label="DetailFragment"
         tools:layout="@layout/fragment_detail" />
 </navigation>
