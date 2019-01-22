@@ -31,7 +31,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
-    api 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
+    api 'androidx.legacy:legacy-support-v4:1.0.0'
     api "android.arch.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
     api "android.arch.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
     api "android.arch.work:work-runtime-ktx:$rootProject.workVersion"
@@ -53,6 +53,15 @@ dependencies {
     api "com.trello.rxlifecycle3:rxlifecycle-components:$rootProject.rxlifecycleVersion"
     api "com.afollestad.material-dialogs:core:$rootProject.materialDialogsVersion"
     api "com.orhanobut:logger:$rootProject.loggerVersion"
-
     api "com.jakewharton.rxbinding3:rxbinding-core:$rootProject.rxbindingVersion"
+
+    api "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+    api "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    api "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    api "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
+    api ("com.squareup.retrofit2:converter-simplexml:$rootProject.retrofitVersion"){
+        exclude group: 'xpp3', module: 'xpp3'
+        exclude group: 'stax', module: 'stax-api'
+        exclude group: 'stax', module: 'stax'
+    }
 }

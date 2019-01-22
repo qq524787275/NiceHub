@@ -35,6 +35,9 @@ buildscript {
         materialDialogsVersion = '2.0.0-rc7'
         loggerVersion = "2.2.0"
         rxbindingVersion = "3.0.0-alpha2"
+
+        okhttpVersion = "3.10.0"
+        retrofitVersion = "2.4.0"
     }
     repositories {
         google()

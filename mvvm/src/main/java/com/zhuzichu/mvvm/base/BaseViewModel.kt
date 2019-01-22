@@ -1,6 +1,7 @@
 package com.zhuzichu.mvvm.base
 
 import android.app.Application
+import android.content.Context
 import android.os.Bundle
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Lifecycle
@@ -9,12 +10,13 @@ import androidx.lifecycle.Observer
 import com.orhanobut.logger.Logger
 import com.trello.rxlifecycle3.LifecycleProvider
 import com.zhuzichu.mvvm.bus.event.SingleLiveEvent
-import java.util.HashMap
+import java.util.*
 
 /**
  * Created by wb.zhuzichu18 on 2019/1/16.
  */
 open class BaseViewModel(application: Application) : AndroidViewModel(application), IBaseViewModel {
+    val context: Context = application.applicationContext
     private val uc: UIChangeLiveData = UIChangeLiveData()
     private lateinit var lifecycle: LifecycleProvider<*>
 
@@ -42,6 +44,10 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     fun showDialog(title: String) {
         Logger.i(title)
         uc.getShowDialogEvent().postValue(title)
+    }
+
+    fun getService(){
+
     }
 
     fun startFragment(action: Int, bundle: Bundle? = null) {

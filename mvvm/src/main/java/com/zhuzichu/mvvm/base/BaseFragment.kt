@@ -7,17 +7,16 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
-import com.trello.rxlifecycle3.components.support.RxFragment
 import androidx.lifecycle.ViewModelProviders
-import com.orhanobut.logger.Logger
-import java.lang.reflect.ParameterizedType
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
+import com.orhanobut.logger.Logger
+import com.trello.rxlifecycle3.components.support.RxFragment
 import com.zhuzichu.mvvm.R
+import java.lang.reflect.ParameterizedType
 
 
 /**
@@ -47,6 +46,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         registorUIChangeLiveDataCallBack()
+        initViewObservable()
     }
 
     //注册ViewModel与View的契约UI回调事件
@@ -107,7 +107,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
             mDialog?.show()
         } else {
             mDialog = MaterialDialog(getBaseActivity())
-                    .title(text = title)
+                    .message(text = title)
                     .cancelOnTouchOutside(false)
                     .customView(viewRes = R.layout.view_loading)
             mDialog?.show()

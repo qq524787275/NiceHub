@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import com.zhuzichu.mvvm.base.IBaseView
-import com.zhuzichu.mvvm.utils.RxUtils
+import com.zhuzichu.mvvm.utils.RxUtil
 import com.zhuzichu.nicehub.R
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
@@ -40,7 +40,7 @@ class JumpView @JvmOverloads constructor(
         super.onStart()
         subscribe = Observable.interval(
                 period.toLong(), TimeUnit.SECONDS)
-                .compose(RxUtils.schedulersTransformer())
+                .compose(RxUtil.schedulersTransformer())
                 .doOnSubscribe {
                     visibility = View.VISIBLE
                     text=String.format(s,time)

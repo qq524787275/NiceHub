@@ -1,8 +1,8 @@
 package com.zhuzichu.nicehub
 
-import android.app.Application
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
+import com.zhuzichu.mvvm.App
 import com.zhuzichu.mvvm.crash.CaocConfig
 import com.zhuzichu.nicehub.main.activity.MainActivity
 
@@ -10,7 +10,7 @@ import com.zhuzichu.nicehub.main.activity.MainActivity
 /**
  * Created by wb.zhuzichu18 on 2019/1/16.
  */
-class NiceApplication : Application() {
+class NiceApplication : App() {
     override fun onCreate() {
         super.onCreate()
         Logger.addLogAdapter(AndroidLogAdapter())

@@ -99,14 +99,14 @@
     <string name="stargazers">星标</string>
     <string name="theme_accent_color">主题强调色</string>
     <string name="unstar">取消星标</string>
-    <string name="unstarred" >已取消星标</string>
-    <string name="unwatch" >取消关注</string>
+    <string name="unstarred">已取消星标</string>
+    <string name="unwatch">取消关注</string>
     <string name="unwatched">已取消关注</string>
-    <string name="watch" >关注</string>
+    <string name="watch">关注</string>
     <string name="watched">已关注</string>
-    <string name="watchers" >关注者</string>
-    <string name="fork" >创建版本库分支</string>
-    <string name="fork_tag" >分支</string>
+    <string name="watchers">关注者</string>
+    <string name="fork">创建版本库分支</string>
+    <string name="fork_tag">分支</string>
     <string name="fork_warning_msg">创建版本库分支？</string>
     <string name="forked">已创建版本库分支</string>
     <string name="forks">版本库分支</string>
@@ -378,4 +378,5 @@
     <string name="issue_unassigned">取消问题分配</string>
     <string name="add_account">添加账户</string>
     <string name="delete_label_warning">确认要删除这个标签？</string>
+
 </resources>
