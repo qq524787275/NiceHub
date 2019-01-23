@@ -66,7 +66,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
                 .compose(schedulersTransformer())
                 .compose(exceptionTransformer())
                 .doOnSubscribe {
-                    showDialog("登录中")
+                    showLoading()
                 }
                 .subscribe({
                     Logger.i("成功了")

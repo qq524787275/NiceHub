@@ -9,13 +9,14 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.trello.rxlifecycle3.LifecycleProvider
 import com.zhuzichu.mvvm.bus.event.SingleLiveEvent
-import com.zhuzichu.mvvm.http.IServices
+import com.zhuzichu.mvvm.global.font.FontConfig
+import com.zhuzichu.mvvm.http.service.IService
 import java.util.*
 
 /**
  * Created by wb.zhuzichu18 on 2019/1/16.
  */
-open class BaseViewModel(application: Application) : AndroidViewModel(application), IBaseViewModel, IServices {
+open class BaseViewModel(application: Application) : AndroidViewModel(application), IBaseViewModel, IService {
     val context: Context = application.applicationContext
     private val uc: UIChangeLiveData = UIChangeLiveData()
     private lateinit var lifecycle: LifecycleProvider<*>
@@ -37,7 +38,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun showLoading() {
-        showDialog("请稍后...")
+        showDialog(""" ${FontConfig.loading.get()}... """)
     }
 
     fun showDialog(title: String) {
@@ -48,7 +49,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
         uc.getDismissDialogEvent().call()
     }
 
-    fun toast(text:String?){
+    fun toast(text: String?) {
         uc.getToastEvent().postValue(text)
     }
 

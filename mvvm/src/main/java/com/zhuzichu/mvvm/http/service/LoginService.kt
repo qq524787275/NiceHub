@@ -1,4 +1,4 @@
-package com.zhuzichu.mvvm.http
+package com.zhuzichu.mvvm.http.service
 
 import androidx.annotation.NonNull
 import com.zhuzichu.mvvm.http.model.AuthRequestModel

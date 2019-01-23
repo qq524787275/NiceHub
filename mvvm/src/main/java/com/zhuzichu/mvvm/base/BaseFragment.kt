@@ -53,7 +53,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
 
     //注册ViewModel与View的契约UI回调事件
     private fun registorUIChangeLiveDataCallBack() {
-        mViewModel.getUC().getToastEvent().observe(this, Observer { text->toast(text) })
+        mViewModel.getUC().getToastEvent().observe(this, Observer { text -> toast(text) })
         //加载对话框显示
         mViewModel.getUC().getShowDialogEvent().observe(this, Observer { title -> showDialog(title) })
         //加载对话框消失
@@ -105,13 +105,14 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
         mDialog?.dismiss()
     }
 
-    fun toast(text:String){
-        Toast.makeText(activity?.applicationContext,text,Toast.LENGTH_SHORT).show()
+    fun toast(text: String) {
+        Toast.makeText(activity?.applicationContext, text, Toast.LENGTH_SHORT).show()
     }
 
 
     fun showDialog(title: String) {
         if (mDialog != null) {
+            mDialog?.message(text = title)
             mDialog?.show()
         } else {
             mDialog = MaterialDialog(getBaseActivity())

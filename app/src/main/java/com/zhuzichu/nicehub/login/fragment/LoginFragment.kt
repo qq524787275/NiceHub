@@ -18,13 +18,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     override fun bindVariableId(): Int = BR.viewModel
 
     override fun initVariable() {
-        mBind.font= FontConfig
+        mBind.font = FontConfig
     }
 
     override fun initViewObservable() {
         mViewModel.uc.showUsernameError.observe(this, Observer {
             if (it) {
-                layoutUsername.error = getString(R.string.user_name_warning)
+                layoutUsername.error = FontConfig.user_name_warning.get()
             } else {
                 layoutUsername.isErrorEnabled = false
             }
@@ -32,7 +32,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
         mViewModel.uc.showPasswordError.observe(this, Observer {
             if (it) {
-                layoutPassword.error = getString(R.string.password_warning)
+                layoutPassword.error = FontConfig.password_warning.get()
             } else {
                 layoutPassword.isErrorEnabled = false
             }
