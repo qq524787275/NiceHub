@@ -7,7 +7,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-import com.orhanobut.logger.Logger
 import com.trello.rxlifecycle3.LifecycleProvider
 import com.zhuzichu.mvvm.bus.event.SingleLiveEvent
 import com.zhuzichu.mvvm.http.IServices
@@ -16,11 +15,10 @@ import java.util.*
 /**
  * Created by wb.zhuzichu18 on 2019/1/16.
  */
-open class BaseViewModel(application: Application) : AndroidViewModel(application), IBaseViewModel,IServices {
+open class BaseViewModel(application: Application) : AndroidViewModel(application), IBaseViewModel, IServices {
     val context: Context = application.applicationContext
     private val uc: UIChangeLiveData = UIChangeLiveData()
     private lateinit var lifecycle: LifecycleProvider<*>
-
     /**
      * 注入RxLifecycle生命周期
      *
@@ -43,16 +41,15 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun showDialog(title: String) {
-        Logger.i(title)
         uc.getShowDialogEvent().postValue(title)
     }
 
-    fun hideDialog(){
+    fun hideDialog() {
         uc.getDismissDialogEvent().call()
     }
 
-    fun getService(){
-
+    fun toast(text:String?){
+        uc.getToastEvent().postValue(text)
     }
 
     fun startFragment(action: Int, bundle: Bundle? = null) {
@@ -74,12 +71,18 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     inner class UIChangeLiveData : SingleLiveEvent<Any>() {
+        private val toastEvent: SingleLiveEvent<String> = SingleLiveEvent()
         private val showDialogEvent: SingleLiveEvent<String> = SingleLiveEvent()
         private val dismissDialogEvent: SingleLiveEvent<Void> = SingleLiveEvent()
         private val startActivityEvent: SingleLiveEvent<Map<String, Any>> = SingleLiveEvent()
         private val startFragmentEvent: SingleLiveEvent<Map<String, Any>> = SingleLiveEvent()
         private val finishEvent: SingleLiveEvent<Void> = SingleLiveEvent()
         private val onBackPressedEvent: SingleLiveEvent<Void> = SingleLiveEvent()
+
+
+        fun getToastEvent(): SingleLiveEvent<String> {
+            return toastEvent
+        }
 
         fun getShowDialogEvent(): SingleLiveEvent<String> {
             return showDialogEvent

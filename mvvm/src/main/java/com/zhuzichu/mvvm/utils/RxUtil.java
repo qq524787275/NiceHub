@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.trello.rxlifecycle3.LifecycleProvider;
 import com.trello.rxlifecycle3.LifecycleTransformer;
+import com.zhuzichu.mvvm.http.ExceptionHandle;
 
 import androidx.fragment.app.Fragment;
 import io.reactivex.Observable;
@@ -12,6 +13,7 @@ import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -79,5 +81,23 @@ public class RxUtil {
                         .observeOn(AndroidSchedulers.mainThread());
             }
         };
+    }
+
+    public static ObservableTransformer exceptionTransformer() {
+
+        return new ObservableTransformer() {
+            @Override
+            public ObservableSource apply(Observable observable) {
+                return observable
+                        .onErrorResumeNext(new HttpResponseFunc());
+            }
+        };
+    }
+
+    private static class HttpResponseFunc<T> implements Function<Throwable, Observable<T>> {
+        @Override
+        public Observable<T> apply(Throwable t) {
+            return Observable.error(ExceptionHandle.handleException(t));
+        }
     }
 }

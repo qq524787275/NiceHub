@@ -1,7 +1,8 @@
 package com.zhuzichu.nicehub.login.fragment
 
-import androidx.databinding.Observable
+import androidx.lifecycle.Observer
 import com.zhuzichu.mvvm.base.BaseFragment
+import com.zhuzichu.mvvm.global.font.FontConfig
 import com.zhuzichu.nicehub.BR
 import com.zhuzichu.nicehub.R
 import com.zhuzichu.nicehub.databinding.FragmentLoginBinding
@@ -16,24 +17,24 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
     override fun bindVariableId(): Int = BR.viewModel
 
+    override fun initVariable() {
+        mBind.font= FontConfig
+    }
+
     override fun initViewObservable() {
-        mViewModel.uc.showUsernameError.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
-            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                if(mViewModel.uc.showUsernameError.get()){
-                    layoutUsername.error = getString(R.string.user_name_warning)
-                }else{
-                    layoutUsername.isErrorEnabled = false
-                }
+        mViewModel.uc.showUsernameError.observe(this, Observer {
+            if (it) {
+                layoutUsername.error = getString(R.string.user_name_warning)
+            } else {
+                layoutUsername.isErrorEnabled = false
             }
         })
 
-        mViewModel.uc.showPasswordError.addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
-            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
-                if(mViewModel.uc.showPasswordError.get()){
-                    layoutPassword.error = getString(R.string.password_warning)
-                }else{
-                    layoutPassword.isErrorEnabled = false
-                }
+        mViewModel.uc.showPasswordError.observe(this, Observer {
+            if (it) {
+                layoutPassword.error = getString(R.string.password_warning)
+            } else {
+                layoutPassword.isErrorEnabled = false
             }
         })
     }

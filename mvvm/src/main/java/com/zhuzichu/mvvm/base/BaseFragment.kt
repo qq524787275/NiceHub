@@ -7,6 +7,7 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
@@ -25,7 +26,7 @@ import java.lang.reflect.ParameterizedType
 abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragment(), IBaseFragment {
     lateinit var mBind: V
     lateinit var mViewModel: VM
-    lateinit var mHandler: Handler
+    private lateinit var mHandler: Handler
     private var mDialog: MaterialDialog? = null
     abstract fun setLayoutId(): Int
     abstract fun bindVariableId(): Int
@@ -46,11 +47,13 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         registorUIChangeLiveDataCallBack()
+        initVariable()
         initViewObservable()
     }
 
     //注册ViewModel与View的契约UI回调事件
     private fun registorUIChangeLiveDataCallBack() {
+        mViewModel.getUC().getToastEvent().observe(this, Observer { text->toast(text) })
         //加载对话框显示
         mViewModel.getUC().getShowDialogEvent().observe(this, Observer { title -> showDialog(title) })
         //加载对话框消失
@@ -98,9 +101,14 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
         return activity as BaseActivity
     }
 
-    private fun dismissDialog() {
+    fun dismissDialog() {
         mDialog?.dismiss()
     }
+
+    fun toast(text:String){
+        Toast.makeText(activity?.applicationContext,text,Toast.LENGTH_SHORT).show()
+    }
+
 
     fun showDialog(title: String) {
         if (mDialog != null) {

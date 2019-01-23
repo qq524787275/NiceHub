@@ -9,4 +9,6 @@ interface IBaseFragment {
     fun onEnterAnimationEnd(savedInstanceState: Bundle?){}
 
     fun initViewObservable(){}
+
+    fun initVariable(){}
 }

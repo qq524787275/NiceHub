@@ -7,6 +7,10 @@
         <variable
             name="viewModel"
             type="com.zhuzichu.nicehub.login.viewmodel.LoginViewModel" />
+
+        <variable
+            name="font"
+            type="com.zhuzichu.mvvm.global.font.FontConfig" />
     </data>
 
     <LinearLayout
@@ -18,22 +22,22 @@
             android:id="@+id/layoutUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/user_name">
+            android:hint="@{font.user_name}">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionNext"
                 android:inputType="textPersonName"
-                android:text="@={viewModel.username}"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:text="@={viewModel.username}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/password"
+            android:hint="@{font.password}"
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="?colorAccent">
 
@@ -42,14 +46,26 @@
                 android:layout_height="wrap_content"
                 android:imeOptions="actionSend"
                 android:inputType="textPassword"
-                android:text="@={viewModel.password}"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:text="@={viewModel.password}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login"
-            app:onClickCommand="@{viewModel.login}"/>
+            android:text="@{font.login}"
+            app:onClickCommand="@{viewModel.login}" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="中文"
+            app:onClickCommand="@{viewModel.zh}" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="英文"
+            app:onClickCommand="@{viewModel.en}" />
     </LinearLayout>
 </layout>
