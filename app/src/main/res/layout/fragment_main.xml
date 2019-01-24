@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.zhuzichu.nicehub.ContainerViewModel" />
+            type="com.zhuzichu.nicehub.main.viewmodel.MainViewModel" />
     </data>
 
     <LinearLayout
@@ -16,7 +16,6 @@
         android:background="#000000"
         android:orientation="vertical">
 
-        <!-- TODO: Update blank fragment layout -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,13 +56,5 @@
             android:layout_height="wrap_content"
             android:text="@string/hello_blank_fragment" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="哈哈哈哈"
-            binding:onClickCommand="@{viewModel.goDetailFragment}" />
     </LinearLayout>
 </layout>
