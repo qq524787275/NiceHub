@@ -8,4 +8,5 @@ import com.zhuzichu.nicehub.R
  */
 class LoginActivity : BaseActivity() {
     override fun setNavGraph(): Int = R.navigation.login_navigation
+
 }

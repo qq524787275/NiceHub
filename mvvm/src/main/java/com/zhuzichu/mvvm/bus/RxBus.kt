@@ -103,7 +103,7 @@ class RxBus {
         @Volatile
         private var mDefaultInstance: RxBus? = null
 
-        val default: RxBus?
+        val default: RxBus
             get() {
                 if (mDefaultInstance == null) {
                     synchronized(RxBus::class.java) {
@@ -112,7 +112,7 @@ class RxBus {
                         }
                     }
                 }
-                return mDefaultInstance
+                return this.mDefaultInstance!!
             }
     }
 }

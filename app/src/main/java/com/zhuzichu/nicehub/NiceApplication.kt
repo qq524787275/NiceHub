@@ -1,5 +1,7 @@
 package com.zhuzichu.nicehub
 
+import android.content.Context
+import androidx.multidex.MultiDex
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.zhuzichu.mvvm.App
@@ -17,6 +19,11 @@ class NiceApplication : App() {
 
         //初始化全局异常崩溃
         initCrash()
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
     }
 
     private fun initCrash() {

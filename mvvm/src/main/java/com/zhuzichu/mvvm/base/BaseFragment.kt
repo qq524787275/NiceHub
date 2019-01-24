@@ -7,7 +7,6 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
@@ -53,7 +52,6 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
 
     //注册ViewModel与View的契约UI回调事件
     private fun registorUIChangeLiveDataCallBack() {
-        mViewModel.getUC().getToastEvent().observe(this, Observer { text -> toast(text) })
         //加载对话框显示
         mViewModel.getUC().getShowDialogEvent().observe(this, Observer { title -> showDialog(title) })
         //加载对话框消失
@@ -104,11 +102,6 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
     fun dismissDialog() {
         mDialog?.dismiss()
     }
-
-    fun toast(text: String) {
-        Toast.makeText(activity?.applicationContext, text, Toast.LENGTH_SHORT).show()
-    }
-
 
     fun showDialog(title: String) {
         if (mDialog != null) {

@@ -14,7 +14,7 @@ class StringsParser {
         sAXParser.parse(path, hander)
 
 
-        var doc =""
+        var doc = ""
 //        hander.wordList.forEach{
 //            doc += (""" override var ${it.key}: String = "${it.value}"${"\n"} """)
 //        }
@@ -27,9 +27,10 @@ class StringsParser {
 //            doc += (""" val ${it.key}: ObservableField<String> = ObservableField()${"\n"} """)
 //        }
 
-        hander.wordList.forEach {
-            doc += (""" ${it.key}.set(font.${it.key})${"\n"} """)
-        }
-        print(doc)
+//        hander.wordList.forEach {
+//            doc += (""" ${it.key}.set(font.${it.key})${"\n"} """)
+//        }
+
+//        print(doc)
     }
 }

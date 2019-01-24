@@ -3,6 +3,7 @@ package com.zhuzichu.nicehub.login.viewmodel
 import android.annotation.SuppressLint
 import android.app.Application
 import android.view.View
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
 import com.zhuzichu.mvvm.base.BaseViewModel
@@ -12,10 +13,10 @@ import com.zhuzichu.mvvm.bus.event.SingleLiveEvent
 import com.zhuzichu.mvvm.global.font.En
 import com.zhuzichu.mvvm.global.font.FontConfig
 import com.zhuzichu.mvvm.global.font.Zh
-import com.zhuzichu.mvvm.http.ResponseThrowable
 import com.zhuzichu.mvvm.http.model.AuthRequestModel
-import com.zhuzichu.mvvm.utils.Convert
-import com.zhuzichu.mvvm.utils.RxUtil.*
+import com.zhuzichu.mvvm.utils.bindToLifecycle
+import com.zhuzichu.mvvm.utils.exceptionTransformer
+import com.zhuzichu.mvvm.utils.schedulersTransformer
 import okhttp3.Credentials
 
 /**
@@ -69,16 +70,29 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
                     showLoading()
                 }
                 .subscribe({
-                    Logger.i("成功了")
-                    Logger.i(Convert.toJson(it))
+                    doGetUser(it.token)
+                    var options = ActivityOptionsCompat.makeCustomAnimation(context, android.R.anim.fade_in, android.R.anim.fade_out).toBundle()
+//                    startActivity(clz = MainActivity::class.java, isPop = true, options = options)
                 }, {
-                    val e = it as ResponseThrowable
-                    toast(e.msg)
+                    handleThrowable(it)
                     hideDialog()
                 }, {
-                    Logger.i("结束了")
                     hideDialog()
                 })
     }
 
+    @SuppressLint("CheckResult")
+    private fun doGetUser(token: String?) {
+        getUserService(token).getPersonInfo(false)
+                .compose(bindToLifecycle(getLifecycleProvider()))
+                .compose(schedulersTransformer())
+                .compose(exceptionTransformer())
+                .subscribe({
+
+                }, {
+
+                }, {
+
+                })
+    }
 }

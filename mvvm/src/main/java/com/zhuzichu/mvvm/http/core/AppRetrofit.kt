@@ -26,7 +26,7 @@ object AppRetrofit {
     private val retrofitMap = HashMap<String, Retrofit>()
     private var token: String? = null
 
-    private fun createRetrofit(@NonNull baseUrl: String, isJson: Boolean?=true) {
+    private fun createRetrofit(@NonNull baseUrl: String, isJson: Boolean? = true) {
         val timeOut = AppConfig.HTTP_TIME_OUT
         val cache = Cache(FileUtil.getHttpImageCacheDir(App.getContext()),
                 AppConfig.HTTP_MAX_CACHE_SIZE)
@@ -35,7 +35,7 @@ object AppRetrofit {
                 .connectTimeout(timeOut.toLong(), TimeUnit.MILLISECONDS)
                 .addInterceptor(BaseInterceptor())
                 .addNetworkInterceptor(NetworkBaseInterceptor())
-                .addInterceptor( LoggingInterceptor
+                .addInterceptor(LoggingInterceptor
                         .Builder()//构建者模式
                         .loggable(BuildConfig.DEBUG) //是否开启日志打印
                         .setLevel(Level.BASIC) //打印的等级
@@ -62,13 +62,13 @@ object AppRetrofit {
         retrofitMap["$baseUrl-$isJson"] = builder.build()
     }
 
-    fun getRetrofit(baseUrl: String, token: String? = null, isJson: Boolean? = true): Retrofit? {
+    fun getRetrofit(baseUrl: String, token: String? = null, isJson: Boolean? = true): Retrofit {
         this.token = token
         val key = "$baseUrl-$isJson"
         if (!retrofitMap.containsKey(key)) {
             createRetrofit(baseUrl, isJson)
         }
-        return retrofitMap[key]
+        return retrofitMap[key]!!
     }
 
     /**

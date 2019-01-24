@@ -10,7 +10,9 @@ import androidx.lifecycle.Observer
 import com.trello.rxlifecycle3.LifecycleProvider
 import com.zhuzichu.mvvm.bus.event.SingleLiveEvent
 import com.zhuzichu.mvvm.global.font.FontConfig
+import com.zhuzichu.mvvm.http.ResponseThrowable
 import com.zhuzichu.mvvm.http.service.IService
+import com.zhuzichu.mvvm.toast
 import java.util.*
 
 /**
@@ -49,8 +51,11 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
         uc.getDismissDialogEvent().call()
     }
 
-    fun toast(text: String?) {
-        uc.getToastEvent().postValue(text)
+
+    fun handleThrowable(throwable: Throwable) {
+        when (throwable) {
+            is ResponseThrowable -> toast(throwable.msg)
+        }
     }
 
     fun startFragment(action: Int, bundle: Bundle? = null) {
@@ -72,18 +77,12 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     inner class UIChangeLiveData : SingleLiveEvent<Any>() {
-        private val toastEvent: SingleLiveEvent<String> = SingleLiveEvent()
         private val showDialogEvent: SingleLiveEvent<String> = SingleLiveEvent()
         private val dismissDialogEvent: SingleLiveEvent<Void> = SingleLiveEvent()
         private val startActivityEvent: SingleLiveEvent<Map<String, Any>> = SingleLiveEvent()
         private val startFragmentEvent: SingleLiveEvent<Map<String, Any>> = SingleLiveEvent()
         private val finishEvent: SingleLiveEvent<Void> = SingleLiveEvent()
         private val onBackPressedEvent: SingleLiveEvent<Void> = SingleLiveEvent()
-
-
-        fun getToastEvent(): SingleLiveEvent<String> {
-            return toastEvent
-        }
 
         fun getShowDialogEvent(): SingleLiveEvent<String> {
             return showDialogEvent
