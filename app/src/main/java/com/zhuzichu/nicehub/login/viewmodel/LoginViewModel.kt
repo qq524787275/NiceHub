@@ -12,6 +12,7 @@ import com.zhuzichu.mvvm.bus.event.SingleLiveEvent
 import com.zhuzichu.mvvm.global.font.En
 import com.zhuzichu.mvvm.global.font.FontConfig
 import com.zhuzichu.mvvm.global.font.Zh
+import com.zhuzichu.mvvm.global.theme.ThemeConfig
 import com.zhuzichu.mvvm.global.user.UserConfig
 import com.zhuzichu.mvvm.http.model.AuthRequestModel
 import com.zhuzichu.mvvm.utils.bindToLifecycle
@@ -56,6 +57,14 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
     val zh = BindingCommand<View>(BindingAction {
         FontConfig.initFont(Zh())
+    })
+
+    val dark = BindingCommand<View>(BindingAction {
+        ThemeConfig.initTheme(true)
+    })
+
+    val night = BindingCommand<View>(BindingAction {
+        ThemeConfig.initTheme(false)
     })
 
     @SuppressLint("CheckResult")

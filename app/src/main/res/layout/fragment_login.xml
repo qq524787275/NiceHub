@@ -11,11 +11,16 @@
         <variable
             name="font"
             type="com.zhuzichu.mvvm.global.font.FontConfig" />
+
+        <variable
+            name="theme"
+            type="com.zhuzichu.mvvm.global.theme.ThemeConfig" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@{theme.windowBackgroud}"
         android:orientation="vertical">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -60,12 +65,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="中文"
+            android:textColor="@{theme.textColorPrimary}"
             app:onClickCommand="@{viewModel.zh}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="英文"
+            android:textColor="@{theme.textColorPrimary}"
             app:onClickCommand="@{viewModel.en}" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="夜间模式"
+            android:textColor="@{theme.textColorPrimary}"
+            app:onClickCommand="@{viewModel.dark}" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="白天模式"
+            android:textColor="@{theme.textColorPrimary}"
+            app:onClickCommand="@{viewModel.night}" />
     </LinearLayout>
 </layout>

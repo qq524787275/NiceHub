@@ -47,6 +47,7 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
         super.onViewCreated(view, savedInstanceState)
         registorUIChangeLiveDataCallBack()
         initVariable()
+        initView()
         initViewObservable()
     }
 
@@ -118,7 +119,9 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
 
     override fun onDestroy() {
         super.onDestroy()
+        if(::mViewModel.isInitialized)
         lifecycle.removeObserver(mViewModel)
+        if(::mBind.isInitialized)
         mBind.unbind()
     }
 

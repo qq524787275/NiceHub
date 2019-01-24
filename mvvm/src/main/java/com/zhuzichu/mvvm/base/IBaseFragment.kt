@@ -11,4 +11,6 @@ interface IBaseFragment {
     fun initViewObservable(){}
 
     fun initVariable(){}
+
+    fun initView(){}
 }

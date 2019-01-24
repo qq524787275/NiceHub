@@ -3,6 +3,7 @@ package com.zhuzichu.nicehub.login.fragment
 import androidx.lifecycle.Observer
 import com.zhuzichu.mvvm.base.BaseFragment
 import com.zhuzichu.mvvm.global.font.FontConfig
+import com.zhuzichu.mvvm.global.theme.ThemeConfig
 import com.zhuzichu.nicehub.BR
 import com.zhuzichu.nicehub.R
 import com.zhuzichu.nicehub.databinding.FragmentLoginBinding
@@ -19,6 +20,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
     override fun initVariable() {
         mBind.font = FontConfig
+        mBind.theme = ThemeConfig
     }
 
     override fun initViewObservable() {

@@ -35,7 +35,7 @@ buildscript {
         materialDialogsVersion = '2.0.0-rc7'
         loggerVersion = "2.2.0"
         rxbindingVersion = "3.0.0-alpha2"
-
+        bottomTabStripVersion = "2.3.0X"
         okhttpVersion = "3.10.0"
         retrofitVersion = "2.4.0"
     }
