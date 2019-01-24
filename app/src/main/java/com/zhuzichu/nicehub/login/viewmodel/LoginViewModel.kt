@@ -5,7 +5,6 @@ import android.app.Application
 import android.view.View
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.MutableLiveData
-import com.orhanobut.logger.Logger
 import com.zhuzichu.mvvm.base.BaseViewModel
 import com.zhuzichu.mvvm.binding.viewadapter.command.BindingAction
 import com.zhuzichu.mvvm.binding.viewadapter.command.BindingCommand
@@ -13,10 +12,12 @@ import com.zhuzichu.mvvm.bus.event.SingleLiveEvent
 import com.zhuzichu.mvvm.global.font.En
 import com.zhuzichu.mvvm.global.font.FontConfig
 import com.zhuzichu.mvvm.global.font.Zh
+import com.zhuzichu.mvvm.global.user.UserConfig
 import com.zhuzichu.mvvm.http.model.AuthRequestModel
 import com.zhuzichu.mvvm.utils.bindToLifecycle
 import com.zhuzichu.mvvm.utils.exceptionTransformer
 import com.zhuzichu.mvvm.utils.schedulersTransformer
+import com.zhuzichu.nicehub.main.activity.MainActivity
 import okhttp3.Credentials
 
 /**
@@ -45,8 +46,6 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             return@BindingAction
         }
         uc.showPasswordError.value = false
-        Logger.i("" + password.value)
-
         val token = Credentials.basic(username.value, password.value)
         doLogin(token)
     })
@@ -70,14 +69,12 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
                     showLoading()
                 }
                 .subscribe({
+                    UserConfig.basecToken.set(it)
                     doGetUser(it.token)
-                    var options = ActivityOptionsCompat.makeCustomAnimation(context, android.R.anim.fade_in, android.R.anim.fade_out).toBundle()
-//                    startActivity(clz = MainActivity::class.java, isPop = true, options = options)
                 }, {
                     handleThrowable(it)
                     hideDialog()
                 }, {
-                    hideDialog()
                 })
     }
 
@@ -88,11 +85,13 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
                 .compose(schedulersTransformer())
                 .compose(exceptionTransformer())
                 .subscribe({
-
+                    UserConfig.user.set(it)
+                    var options = ActivityOptionsCompat.makeCustomAnimation(context, android.R.anim.fade_in, android.R.anim.fade_out).toBundle()
+                    startActivity(clz = MainActivity::class.java, isPop = true, options = options)
                 }, {
-
+                    hideDialog()
                 }, {
-
+                    hideDialog()
                 })
     }
 }

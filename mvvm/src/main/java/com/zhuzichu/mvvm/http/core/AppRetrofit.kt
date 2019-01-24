@@ -1,12 +1,11 @@
 package com.zhuzichu.mvvm.http.core
 
 import androidx.annotation.NonNull
-import com.zhuzichu.mvvm.App
 import com.zhuzichu.mvvm.AppConfig
 import com.zhuzichu.mvvm.BuildConfig
 import com.zhuzichu.mvvm.http.interceptor.logging.Level
 import com.zhuzichu.mvvm.http.interceptor.logging.LoggingInterceptor
-import com.zhuzichu.mvvm.utils.FileUtil
+import com.zhuzichu.mvvm.utils.getHttpImageCacheDir
 import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -28,7 +27,7 @@ object AppRetrofit {
 
     private fun createRetrofit(@NonNull baseUrl: String, isJson: Boolean? = true) {
         val timeOut = AppConfig.HTTP_TIME_OUT
-        val cache = Cache(FileUtil.getHttpImageCacheDir(App.getContext()),
+        val cache = Cache(getHttpImageCacheDir(),
                 AppConfig.HTTP_MAX_CACHE_SIZE)
 
         val okHttpClient = OkHttpClient.Builder()
