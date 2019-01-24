@@ -12,7 +12,7 @@ import com.zhuzichu.mvvm.bus.event.SingleLiveEvent
 import com.zhuzichu.mvvm.global.font.FontConfig
 import com.zhuzichu.mvvm.http.ResponseThrowable
 import com.zhuzichu.mvvm.http.service.IService
-import com.zhuzichu.mvvm.toast
+import com.zhuzichu.mvvm.utils.toast
 import java.util.*
 
 /**
