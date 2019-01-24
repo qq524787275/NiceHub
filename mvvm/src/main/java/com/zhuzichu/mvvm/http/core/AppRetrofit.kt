@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.zhuzichu.mvvm.http.core
 
 import androidx.annotation.NonNull
@@ -79,7 +81,7 @@ object AppRetrofit {
             var request = chain.request()
 
             if (!token.isNullOrBlank()) {
-                val auth = if (token?.startsWith("Basic")!!) token else "token $token"
+                val auth: String = if (token?.startsWith("Basic")!!) token!! else "token $token"
                 request = request.newBuilder()
                         .addHeader("Authorization", auth)
                         .build()

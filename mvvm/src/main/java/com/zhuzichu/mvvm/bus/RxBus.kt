@@ -65,7 +65,7 @@ class RxBus {
             val event = mStickyEventMap[eventType]
 
             return if (event != null) {
-                Observable.merge(observable, Observable.create { emitter -> emitter.onNext(eventType.cast(event)) })
+                Observable.merge(observable, Observable.create { emitter -> emitter.onNext(eventType.cast(event) as T) })
             } else {
                 observable
             }
@@ -77,7 +77,7 @@ class RxBus {
      */
     fun <T> getStickyEvent(eventType: Class<T>): T {
         synchronized(mStickyEventMap) {
-            return eventType.cast(mStickyEventMap[eventType])
+            return eventType.cast(mStickyEventMap[eventType]) as T
         }
     }
 
@@ -86,7 +86,7 @@ class RxBus {
      */
     fun <T> removeStickyEvent(eventType: Class<T>): T {
         synchronized(mStickyEventMap) {
-            return eventType.cast(mStickyEventMap.remove(eventType))
+            return eventType.cast(mStickyEventMap.remove(eventType)) as T
         }
     }
 
