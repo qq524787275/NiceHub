@@ -1,6 +1,6 @@
-package com.zhuzichu.mvvm.global.font
+package com.zhuzichu.mvvm.global.language
 
-class En : Font() {
+class En : Lang() {
     override var user_name: String = "Username"
     override var password: String = "Password"
     override var login: String = "Login"

@@ -8,30 +8,46 @@
         <variable
             name="viewModel"
             type="com.zhuzichu.nicehub.main.viewmodel.MainViewModel" />
+
+        <variable
+            name="theme"
+            type="com.zhuzichu.mvvm.global.theme.ThemeConfig" />
     </data>
 
-    <LinearLayout
+    <com.zhuzichu.mvvm.view.reveal.widget.RevealFrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@{theme.windowBackgroud}">
 
-        <fragment
-            android:id="@+id/content"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+        <LinearLayout
+            android:id="@+id/layout_overlay"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/navigation_main_page" />
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
 
-        <me.majiajie.pagerbottomtabstrip.PageNavigationView
-            android:id="@+id/bottom"
+        <FrameLayout
+            android:id="@+id/layout_content"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="#FFF"
-            android:elevation="8dp"
-            tools:targetApi="lollipop" />
+            android:layout_height="match_parent">
 
+            <fragment
+                android:id="@+id/content"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="56dp"
+                app:defaultNavHost="true"
+                app:navGraph="@navigation/navigation_main_page" />
 
-    </LinearLayout>
+            <me.majiajie.pagerbottomtabstrip.PageNavigationView
+                android:id="@+id/bottom"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_gravity="bottom"
+                android:background="#FFF"
+                android:elevation="8dp"
+                tools:targetApi=" " />
+        </FrameLayout>
+
+    </com.zhuzichu.mvvm.view.reveal.widget.RevealFrameLayout>
 </layout>

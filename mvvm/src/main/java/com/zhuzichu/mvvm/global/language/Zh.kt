@@ -1,6 +1,6 @@
-package com.zhuzichu.mvvm.global.font
+package com.zhuzichu.mvvm.global.language
 
-class Zh : Font() {
+class Zh : Lang() {
     override var user_name: String = "用户名"
     override var password: String = "密码"
     override var login: String = "登录"

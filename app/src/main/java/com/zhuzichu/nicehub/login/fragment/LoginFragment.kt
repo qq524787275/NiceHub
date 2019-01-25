@@ -2,7 +2,7 @@ package com.zhuzichu.nicehub.login.fragment
 
 import androidx.lifecycle.Observer
 import com.zhuzichu.mvvm.base.BaseFragment
-import com.zhuzichu.mvvm.global.font.FontConfig
+import com.zhuzichu.mvvm.global.language.LangConfig
 import com.zhuzichu.mvvm.global.theme.ThemeConfig
 import com.zhuzichu.nicehub.BR
 import com.zhuzichu.nicehub.R
@@ -19,14 +19,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     override fun bindVariableId(): Int = BR.viewModel
 
     override fun initVariable() {
-        mBind.font = FontConfig
+        mBind.lang = LangConfig
         mBind.theme = ThemeConfig
     }
 
     override fun initViewObservable() {
         mViewModel.uc.showUsernameError.observe(this, Observer {
             if (it) {
-                layoutUsername.error = FontConfig.user_name_warning.get()
+                layoutUsername.error = LangConfig.user_name_warning.get()
             } else {
                 layoutUsername.isErrorEnabled = false
             }
@@ -34,7 +34,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
         mViewModel.uc.showPasswordError.observe(this, Observer {
             if (it) {
-                layoutPassword.error = FontConfig.password_warning.get()
+                layoutPassword.error = LangConfig.password_warning.get()
             } else {
                 layoutPassword.isErrorEnabled = false
             }

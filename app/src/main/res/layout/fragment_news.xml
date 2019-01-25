@@ -8,8 +8,12 @@
             type="com.zhuzichu.nicehub.main.viewmodel.NewsViewModel" />
 
         <variable
-            name="font"
-            type="com.zhuzichu.mvvm.global.font.FontConfig" />
+            name="lang"
+            type="com.zhuzichu.mvvm.global.language.LangConfig" />
+
+        <variable
+            name="theme"
+            type="com.zhuzichu.mvvm.global.theme.ThemeConfig" />
     </data>
 
     <RelativeLayout
@@ -20,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@{font.news}" />
+            android:text="@{lang.news}"
+            android:textColor="@{theme.textColorPrimary}" />
     </RelativeLayout>
 </layout>

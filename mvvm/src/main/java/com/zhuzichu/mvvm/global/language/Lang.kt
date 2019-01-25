@@ -1,6 +1,6 @@
-package com.zhuzichu.mvvm.global.font
+package com.zhuzichu.mvvm.global.language
 
-abstract class Font{
+abstract class Lang{
     abstract var user_name: String
     abstract var password: String
     abstract var login: String

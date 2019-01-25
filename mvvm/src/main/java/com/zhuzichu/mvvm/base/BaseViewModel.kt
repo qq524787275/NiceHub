@@ -9,7 +9,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.trello.rxlifecycle3.LifecycleProvider
 import com.zhuzichu.mvvm.bus.event.SingleLiveEvent
-import com.zhuzichu.mvvm.global.font.FontConfig
+import com.zhuzichu.mvvm.global.language.LangConfig
 import com.zhuzichu.mvvm.http.ResponseThrowable
 import com.zhuzichu.mvvm.http.service.IService
 import com.zhuzichu.mvvm.utils.toast
@@ -40,7 +40,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun showLoading() {
-        showDialog(""" ${FontConfig.loading.get()}... """)
+        showDialog(""" ${LangConfig.loading.get()}... """)
     }
 
     fun showDialog(title: String) {

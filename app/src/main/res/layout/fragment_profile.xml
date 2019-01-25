@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,19 +9,37 @@
             type="com.zhuzichu.nicehub.main.viewmodel.ProfileViewModel" />
 
         <variable
-            name="font"
-            type="com.zhuzichu.mvvm.global.font.FontConfig" />
+            name="lang"
+            type="com.zhuzichu.mvvm.global.language.LangConfig" />
+
+        <variable
+            name="theme"
+            type="com.zhuzichu.mvvm.global.theme.ThemeConfig" />
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorAccent">
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@{font.profile}" />
-    </RelativeLayout>
+            android:textColor="@{theme.textColorPrimary}"
+            android:text="@{lang.profile}" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="夜间模式"
+            android:textColor="@{theme.textColorPrimary}"
+            app:onClickCommand="@{viewModel.dark}" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="白天模式"
+            android:textColor="@{theme.textColorPrimary}"
+            app:onClickCommand="@{viewModel.night}" />
+    </LinearLayout>
 </layout>

@@ -9,10 +9,9 @@ import com.zhuzichu.mvvm.base.BaseViewModel
 import com.zhuzichu.mvvm.binding.viewadapter.command.BindingAction
 import com.zhuzichu.mvvm.binding.viewadapter.command.BindingCommand
 import com.zhuzichu.mvvm.bus.event.SingleLiveEvent
-import com.zhuzichu.mvvm.global.font.En
-import com.zhuzichu.mvvm.global.font.FontConfig
-import com.zhuzichu.mvvm.global.font.Zh
-import com.zhuzichu.mvvm.global.theme.ThemeConfig
+import com.zhuzichu.mvvm.global.language.En
+import com.zhuzichu.mvvm.global.language.LangConfig
+import com.zhuzichu.mvvm.global.language.Zh
 import com.zhuzichu.mvvm.global.user.UserConfig
 import com.zhuzichu.mvvm.http.model.AuthRequestModel
 import com.zhuzichu.mvvm.utils.bindToLifecycle
@@ -52,20 +51,13 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
     })
 
     val en = BindingCommand<View>(BindingAction {
-        FontConfig.initFont(En())
+        LangConfig.initLang(En())
     })
 
     val zh = BindingCommand<View>(BindingAction {
-        FontConfig.initFont(Zh())
+        LangConfig.initLang(Zh())
     })
 
-    val dark = BindingCommand<View>(BindingAction {
-        ThemeConfig.initTheme(true)
-    })
-
-    val night = BindingCommand<View>(BindingAction {
-        ThemeConfig.initTheme(false)
-    })
 
     @SuppressLint("CheckResult")
     private fun doLogin(token: String) {
