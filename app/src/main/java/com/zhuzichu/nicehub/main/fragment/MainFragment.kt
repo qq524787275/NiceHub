@@ -1,10 +1,18 @@
 package com.zhuzichu.nicehub.main.fragment
 
+import android.annotation.SuppressLint
+import android.graphics.drawable.BitmapDrawable
+import android.view.animation.AccelerateInterpolator
 import androidx.navigation.Navigation
 import com.zhuzichu.mvvm.base.BaseFragment
+import com.zhuzichu.mvvm.bus.Event
+import com.zhuzichu.mvvm.bus.RxBus
 import com.zhuzichu.mvvm.global.language.LangConfig
 import com.zhuzichu.mvvm.global.theme.ThemeConfig
+import com.zhuzichu.mvvm.utils.bindToLifecycle
+import com.zhuzichu.mvvm.utils.createBitmapFromView
 import com.zhuzichu.mvvm.utils.setupWithNavController
+import com.zhuzichu.mvvm.view.reveal.animation.ViewAnimationUtils
 import com.zhuzichu.nicehub.BR
 import com.zhuzichu.nicehub.R
 import com.zhuzichu.nicehub.databinding.FragmentMainBinding
@@ -18,7 +26,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
     override fun bindVariableId(): Int = BR.viewModel
 
     override fun initVariable() {
-        mBind.theme=ThemeConfig
+        mBind.theme = ThemeConfig
     }
 
     override fun initView() {
@@ -33,6 +41,22 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
         setupWithNavController(PAGE_IDS.toIntArray(), navigationController, Navigation.findNavController(getBaseActivity(), R.id.content))
     }
 
+
+    @SuppressLint("CheckResult")
+    override fun initViewObservable() {
+        RxBus.default.toObservable(Event.ThemeChangeEvent::class.java)
+                .compose(bindToLifecycle(mViewModel.getLifecycleProvider()))
+                .subscribe {
+                    val centerX = (layout_content.left + layout_content.right) / 2
+                    val centerY = (layout_content.top + layout_content.bottom) / 2
+                    val finalRadius = Math.hypot(centerX.toDouble(), centerY.toDouble()).toFloat()
+                    val mCircularReveal = ViewAnimationUtils.createCircularReveal(layout_content, centerX, centerY, 0f, finalRadius)
+                    mCircularReveal.interpolator = AccelerateInterpolator()
+                    val drawable = BitmapDrawable(createBitmapFromView(layout_content))
+                    layout_overlay.setBackgroundDrawable(drawable)
+                    mCircularReveal.setDuration(500).start()
+                }
+    }
 
     companion object {
         private val PAGE_IDS = arrayOf(R.id.newsFragment, R.id.profileFragment)

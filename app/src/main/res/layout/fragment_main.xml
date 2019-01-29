@@ -16,8 +16,7 @@
 
     <com.zhuzichu.mvvm.view.reveal.widget.RevealFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@{theme.windowBackgroud}">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/layout_overlay"
@@ -44,9 +43,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_gravity="bottom"
-                android:background="#FFF"
+                android:background="@{theme.bottomBackgroud}"
                 android:elevation="8dp"
-                tools:targetApi=" " />
+                tools:targetApi="lollipop" />
         </FrameLayout>
 
     </com.zhuzichu.mvvm.view.reveal.widget.RevealFrameLayout>

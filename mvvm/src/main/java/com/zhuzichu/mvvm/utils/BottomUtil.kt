@@ -18,17 +18,17 @@ fun setupWithNavController(@NonNull pageIds: IntArray, @NonNull navigationContro
         override fun onRepeat(index: Int) {}
     })
 
-//    navController.addOnDestinationChangedListener { _, destination, _ ->
-//        val destinationId = destination.id
-//        for (i in pageIds.indices) {
-//            if (destinationId == pageIds[i]) {
-//                if (navigationController.selected != i) {
-//                    navigationController.setSelect(i, false)
-//                }
-//                break
-//            }
-//        }
-//    }
+    navController.addOnDestinationChangedListener { _, destination, _ ->
+        val destinationId = destination.id
+        for (i in pageIds.indices) {
+            if (destinationId == pageIds[i]) {
+                if (navigationController.selected != i) {
+                    navigationController.setSelect(i, false)
+                }
+                break
+            }
+        }
+    }
 }
 
 private fun onNavDestinationSelected(id: Int, @NonNull navController: NavController) {

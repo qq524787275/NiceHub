@@ -11,6 +11,7 @@ object ThemeConfig {
     val textColorPrimary: ObservableField<Int> = ObservableField()
     val textColorSeconday: ObservableField<Int> = ObservableField()
     val hintColor: ObservableField<Int> = ObservableField()
+    val bottomBackgroud: ObservableField<Int> = ObservableField()
 
     fun initColorPrimary(color: Int) {
         colorPrimary.set(color)
@@ -22,11 +23,13 @@ object ThemeConfig {
             textColorPrimary.set(getColor(R.color.colorPrimaryTextDark))
             textColorSeconday.set(getColor(R.color.colorSecondTextDark))
             hintColor.set(getColor(R.color.colorHintDark))
+            bottomBackgroud.set(getColor(R.color.black))
         } else {
             windowBackgroud.set(getColor(R.color.colorBackground))
             textColorPrimary.set(getColor(R.color.colorPrimaryText))
             textColorSeconday.set(getColor(R.color.colorSecondText))
             hintColor.set(getColor(R.color.colorHint))
+            bottomBackgroud.set(getColor(R.color.white))
         }
     }
 }

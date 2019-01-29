@@ -20,13 +20,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@{theme.windowBackgroud}"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@{theme.textColorPrimary}"
-            android:text="@{lang.profile}" />
+            android:text="@{lang.profile}"
+            android:textColor="@{theme.textColorPrimary}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
