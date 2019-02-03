@@ -17,4 +17,5 @@ class NewsFragment : BaseFragment<FragmentNewsBinding, NewsViewModel>() {
         mBind.lang = LangConfig
         mBind.theme = ThemeConfig
     }
+
 }

@@ -38,6 +38,7 @@ buildscript {
         bottomTabStripVersion = "2.3.0X"
         okhttpVersion = "3.10.0"
         retrofitVersion = "2.4.0"
+        adapterVersion = "3.0.0-beta3"
     }
     repositories {
         google()

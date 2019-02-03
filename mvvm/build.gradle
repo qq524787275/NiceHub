@@ -61,6 +61,9 @@ dependencies {
     api "com.jakewharton.rxbinding3:rxbinding-core:$rootProject.rxbindingVersion"
     api "me.majiajie:pager-bottom-tab-strip:$rootProject.bottomTabStripVersion"
 
+    api "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter:$rootProject.adapterVersion"
+    api "me.tatarka.bindingcollectionadapter2:bindingcollectionadapter-recyclerview:$rootProject.adapterVersion"
+
     api "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
     api "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     api "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
