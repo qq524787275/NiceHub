@@ -13,6 +13,7 @@ import com.zhuzichu.mvvm.global.language.LangConfig
 import com.zhuzichu.mvvm.http.ResponseThrowable
 import com.zhuzichu.mvvm.http.service.IService
 import com.zhuzichu.mvvm.utils.toast
+import com.zhuzichu.mvvm.view.layout.MultiStateView
 import java.util.*
 
 /**
@@ -39,7 +40,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
         return uc
     }
 
-    fun showLoading() {
+    fun showLoadingDialog() {
         showDialog(""" ${LangConfig.loading.get()}... """)
     }
 
@@ -51,6 +52,21 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
         uc.getDismissDialogEvent().call()
     }
 
+    fun showContent() {
+        uc.getMultiStateEvent().postValue(MultiStateView.VIEW_STATE_CONTENT)
+    }
+
+    fun showError() {
+        uc.getMultiStateEvent().postValue(MultiStateView.VIEW_STATE_ERROR)
+    }
+
+    fun showEmpty() {
+        uc.getMultiStateEvent().postValue(MultiStateView.VIEW_STATE_EMPTY)
+    }
+
+    fun showLoading() {
+        uc.getMultiStateEvent().postValue(MultiStateView.VIEW_STATE_LOADING)
+    }
 
     fun handleThrowable(throwable: Throwable) {
         when (throwable) {
@@ -58,12 +74,9 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    fun startFragment(action: Int, bundle: Bundle? = null) {
+    fun startFragment(id: Int) {
         val params = HashMap<String, Any>()
-        params[ParameterField.ACTION] = action
-        if (bundle != null) {
-            params[ParameterField.BUNDLE] = bundle
-        }
+        params[ParameterField.ID] = id
         uc.getStartFragmentEvent().postValue(params)
     }
 
@@ -83,6 +96,7 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
         private val startFragmentEvent: SingleLiveEvent<Map<String, Any>> = SingleLiveEvent()
         private val finishEvent: SingleLiveEvent<Void> = SingleLiveEvent()
         private val onBackPressedEvent: SingleLiveEvent<Void> = SingleLiveEvent()
+        private val multiStateEvent: SingleLiveEvent<Int> = SingleLiveEvent()
 
         fun getShowDialogEvent(): SingleLiveEvent<String> {
             return showDialogEvent
@@ -90,6 +104,10 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
 
         fun getDismissDialogEvent(): SingleLiveEvent<Void> {
             return dismissDialogEvent
+        }
+
+        fun getMultiStateEvent(): SingleLiveEvent<Int> {
+            return multiStateEvent
         }
 
         fun getStartActivityEvent(): SingleLiveEvent<Map<String, Any>> {
@@ -114,12 +132,11 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     object ParameterField {
-        var ACTION = "ACTION"
+        var ID = "ID"
         var CLASS = "CLASS"
         var BUNDLE = "BUNDLE"
         var POP = "POP"
         var OPTIONS = "OPTIONS"
-        var CANONICAL_NAME = "CANONICAL_NAME"
     }
 
     override fun onAny(owner: LifecycleOwner, event: Lifecycle.Event) {
@@ -144,5 +161,9 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     override fun onEnterAnimationEnd() {
+
+    }
+
+    override fun init() {
     }
 }

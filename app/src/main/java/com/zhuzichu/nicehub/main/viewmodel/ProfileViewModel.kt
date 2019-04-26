@@ -8,6 +8,7 @@ import com.zhuzichu.mvvm.binding.viewadapter.command.BindingCommand
 import com.zhuzichu.mvvm.bus.Event
 import com.zhuzichu.mvvm.bus.RxBus
 import com.zhuzichu.mvvm.global.theme.ThemeConfig
+import com.zhuzichu.nicehub.R
 
 class ProfileViewModel(application: Application) : BaseViewModel(application) {
 
@@ -21,4 +22,7 @@ class ProfileViewModel(application: Application) : BaseViewModel(application) {
         RxBus.default.post(Event.ThemeChangeEvent())
     })
 
+    val start = BindingCommand<View>(BindingAction {
+        startFragment(R.id.profileFragment2)
+    })
 }

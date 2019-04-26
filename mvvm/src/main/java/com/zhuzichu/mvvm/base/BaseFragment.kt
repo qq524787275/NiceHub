@@ -11,11 +11,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.NavOptions
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.orhanobut.logger.Logger
 import com.trello.rxlifecycle3.components.support.RxFragment
 import com.zhuzichu.mvvm.R
+import com.zhuzichu.mvvm.view.layout.MultiStateView
 import java.lang.reflect.ParameterizedType
 
 
@@ -25,22 +27,37 @@ import java.lang.reflect.ParameterizedType
 abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragment(), IBaseFragment {
     lateinit var mBind: V
     lateinit var mViewModel: VM
+    lateinit var contentView: View
+    lateinit var multiStateView: MultiStateView
     private lateinit var mHandler: Handler
     private var mDialog: MaterialDialog? = null
     abstract fun setLayoutId(): Int
     abstract fun bindVariableId(): Int
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        Logger.i(this.javaClass.simpleName + "---创建了")
-        val root = inflater.inflate(setLayoutId(), container, false)
         mHandler = Handler(Looper.getMainLooper())
-        mBind = DataBindingUtil.bind(root)!!
         val type = this.javaClass.genericSuperclass
         if (type is ParameterizedType) mViewModel = ViewModelProviders.of(this).get(type.actualTypeArguments[1] as Class<VM>)
-        mBind.setVariable(bindVariableId(), mViewModel)
         lifecycle.addObserver(mViewModel)
         mViewModel.injectLifecycleProvider(this)
+
+        if (::contentView.isInitialized) {
+            val parent = contentView.parent
+            if (parent != null) {
+                (parent as ViewGroup).removeView(contentView)
+            }
+        } else {
+            contentView = inflater.inflate(setLayoutId(), container, false)
+            mViewModel.init()
+        }
+
+        mBind = DataBindingUtil.bind(contentView)!!
+        mBind.setVariable(bindVariableId(), mViewModel)
+
         mHandler.postDelayed({ onEnterAnimationEnd(savedInstanceState) }, resources.getInteger(R.integer.fragment_anim_duration).toLong())
-        return mBind.root
+
+        multiStateView = inflater.inflate(R.layout.layout_multi_state, null) as MultiStateView
+        multiStateView.addView(mBind.root)
+        return multiStateView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,16 +70,17 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
 
     //注册ViewModel与View的契约UI回调事件
     private fun registorUIChangeLiveDataCallBack() {
-        //加载对话框显示
-        mViewModel.getUC().getShowDialogEvent().observe(this, Observer { title -> showDialog(title) })
-        //加载对话框消失
-        mViewModel.getUC().getDismissDialogEvent().observe(this, Observer { dismissDialog() })
         //跳入新Fragment页面
         mViewModel.getUC().getStartFragmentEvent().observe(this, Observer { params ->
             run {
-                val action = params[BaseViewModel.ParameterField.ACTION] as Int
-                val bundle = params[BaseViewModel.ParameterField.BUNDLE] as Bundle?
-                getBaseActivity().mNavController.navigate(action, bundle)
+                val id = params[BaseViewModel.ParameterField.ID] as Int
+                val options = NavOptions.Builder()
+                        .setEnterAnim(R.anim.slide_in_right)
+                        .setExitAnim(R.anim.slide_out_left)
+                        .setPopEnterAnim(R.anim.slide_in_left)
+                        .setPopExitAnim(R.anim.slide_out_right)
+                        .build()
+                getBaseActivity().mNavController.navigate(id, null, options)
             }
         })
         //跳转到新Activity页面
@@ -90,14 +108,16 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
         mViewModel.getUC().getFinishEvent().observe(this, Observer { getBaseActivity().finish() })
         //有Fragment 退出fragment
         mViewModel.getUC().getOnBackPressedEvent().observe(this, Observer { getBaseActivity().onBackPressed() })
-    }
+        //加载对话框显示
+        mViewModel.getUC().getShowDialogEvent().observe(this, Observer { title -> showDialog(title) })
+        //加载对话框消失
+        mViewModel.getUC().getDismissDialogEvent().observe(this, Observer { dismissDialog() })
 
-    fun getHandler(): Handler? {
-        return mHandler
-    }
-
-    fun getBaseActivity(): BaseActivity {
-        return activity as BaseActivity
+        mViewModel.getUC().getMultiStateEvent().observe(this, Observer { params ->
+            run {
+                multiStateView.viewState = params
+            }
+        })
     }
 
     fun dismissDialog() {
@@ -117,12 +137,20 @@ abstract class BaseFragment<V : ViewDataBinding, VM : BaseViewModel> : RxFragmen
         }
     }
 
+    fun getHandler(): Handler? {
+        return mHandler
+    }
+
+    fun getBaseActivity(): BaseActivity {
+        return activity as BaseActivity
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        if(::mViewModel.isInitialized)
-        lifecycle.removeObserver(mViewModel)
-        if(::mBind.isInitialized)
-        mBind.unbind()
+        if (::mViewModel.isInitialized)
+            lifecycle.removeObserver(mViewModel)
+        if (::mBind.isInitialized)
+            mBind.unbind()
     }
 
     /**

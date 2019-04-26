@@ -35,6 +35,12 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
     var uc = UIChangeObservable()
 
+    override fun onStart() {
+        super.onStart()
+        username.value = "qq524787275"
+        password.value = "zhuzichu520"
+    }
+
     val login = BindingCommand<View>(BindingAction {
         if (username.value.isNullOrBlank()) {
             uc.showUsernameError.value = true
@@ -67,7 +73,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
                 .compose(schedulersTransformer())
                 .compose(exceptionTransformer())
                 .doOnSubscribe {
-                    showLoading()
+                    showLoadingDialog()
                 }
                 .subscribe({
                     UserConfig.basecToken.set(it)
@@ -87,7 +93,7 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
                 .compose(exceptionTransformer())
                 .subscribe({
                     UserConfig.user.set(it)
-                    var options = ActivityOptionsCompat.makeCustomAnimation(context, android.R.anim.fade_in, android.R.anim.fade_out).toBundle()
+                    val options = ActivityOptionsCompat.makeCustomAnimation(context, android.R.anim.fade_in, android.R.anim.fade_out).toBundle()
                     startActivity(clz = MainActivity::class.java, isPop = true, options = options)
                 }, {
                     hideDialog()

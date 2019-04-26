@@ -15,6 +15,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>()
 
     override fun initVariable() {
         mBind.lang = LangConfig
-        mBind.theme= ThemeConfig
+        mBind.theme = ThemeConfig
     }
 }

@@ -27,4 +27,8 @@ abstract class BaseActivity : AppCompatActivity() {
             mNavController.setGraph(setNavGraph(), savedInstanceState)
         }
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return mNavController.navigateUp() || super.onSupportNavigateUp()
+    }
 }

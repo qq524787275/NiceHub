@@ -2,8 +2,8 @@ package com.zhuzichu.mvvm.base
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.OnLifecycleEvent
 
 
 /**
@@ -33,4 +33,6 @@ interface IBaseViewModel : LifecycleObserver {
     fun onPause()
 
     fun onEnterAnimationEnd()
+
+    fun init()
 }

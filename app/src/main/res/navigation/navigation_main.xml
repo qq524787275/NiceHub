@@ -8,5 +8,27 @@
         android:id="@+id/mainFragment"
         android:name="com.zhuzichu.nicehub.main.fragment.MainFragment"
         android:label="MainFragment"
-        tools:layout="@layout/fragment_main"/>
+        tools:layout="@layout/fragment_main" />
+
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="com.zhuzichu.nicehub.main.fragment.NewsFragment"
+        android:label="NewsFragment"
+        tools:layout="@layout/fragment_news" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.zhuzichu.nicehub.main.fragment.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_profileFragment2"
+            app:destination="@id/profileFragment2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment2"
+        android:name="com.zhuzichu.nicehub.main.fragment.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

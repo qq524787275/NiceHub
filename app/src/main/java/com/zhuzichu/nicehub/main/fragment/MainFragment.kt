@@ -1,9 +1,10 @@
 package com.zhuzichu.nicehub.main.fragment
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.view.animation.AccelerateInterpolator
-import androidx.navigation.Navigation
+import androidx.fragment.app.Fragment
 import com.zhuzichu.mvvm.base.BaseFragment
 import com.zhuzichu.mvvm.bus.Event
 import com.zhuzichu.mvvm.bus.RxBus
@@ -11,13 +12,16 @@ import com.zhuzichu.mvvm.global.language.LangConfig
 import com.zhuzichu.mvvm.global.theme.ThemeConfig
 import com.zhuzichu.mvvm.utils.bindToLifecycle
 import com.zhuzichu.mvvm.utils.createBitmapFromView
-import com.zhuzichu.mvvm.utils.setupWithNavController
 import com.zhuzichu.mvvm.view.reveal.animation.ViewAnimationUtils
+import com.zhuzichu.mvvm.view.viewpage.NiceViewPagerAdapter
 import com.zhuzichu.nicehub.BR
 import com.zhuzichu.nicehub.R
 import com.zhuzichu.nicehub.databinding.FragmentMainBinding
 import com.zhuzichu.nicehub.main.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
+import me.majiajie.pagerbottomtabstrip.item.BaseTabItem
+import me.majiajie.pagerbottomtabstrip.item.NormalItemView
+
 
 class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
 
@@ -33,14 +37,32 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
         initBottomNavigation()
     }
 
+    lateinit var fragments: ArrayList<Fragment>
+
     private fun initBottomNavigation() {
-        val navigationController = bottom.material()
-                .addItem(R.drawable.ic_menu_news, LangConfig.news.get().toString())
-                .addItem(R.drawable.ic_menu_person, LangConfig.profile.get().toString())
+        val navigationController = bottom.custom()
+                .addItem(newItem(R.drawable.ic_menu_news_gray, R.drawable.ic_menu_news, LangConfig.news.get().toString()))
+                .addItem(newItem(R.drawable.ic_menu_person_gray, R.drawable.ic_menu_person, LangConfig.profile.get().toString()))
                 .build()
-        setupWithNavController(PAGE_IDS.toIntArray(), navigationController, Navigation.findNavController(getBaseActivity(), R.id.content))
+
+        fragments = ArrayList(navigationController.itemCount)
+        fragments.add(NewsFragment())
+        fragments.add(ProfileFragment())
+
+        content.offscreenPageLimit = navigationController.itemCount
+        content.adapter = NiceViewPagerAdapter(getBaseActivity().supportFragmentManager, fragments)
+
+        navigationController.setupWithViewPager(content)
     }
 
+    //创建一个Item
+    private fun newItem(drawable: Int, checkedDrawable: Int, text: String): BaseTabItem {
+        val normalItemView = NormalItemView(context)
+        normalItemView.initialize(drawable, checkedDrawable, text)
+        normalItemView.setTextDefaultColor(Color.GRAY)
+        normalItemView.setTextCheckedColor(-0xff6978)
+        return normalItemView
+    }
 
     @SuppressLint("CheckResult")
     override fun initViewObservable() {

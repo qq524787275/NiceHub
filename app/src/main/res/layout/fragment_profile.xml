@@ -42,5 +42,11 @@
             android:text="白天模式"
             android:textColor="@{theme.textColorPrimary}"
             app:onClickCommand="@{viewModel.night}" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="跳转"
+            app:onClickCommand="@{viewModel.start}" />
     </LinearLayout>
 </layout>

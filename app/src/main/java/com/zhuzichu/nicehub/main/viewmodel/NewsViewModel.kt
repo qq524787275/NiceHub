@@ -21,8 +21,7 @@ class NewsViewModel(application: Application) : BaseViewModel(application) {
     val items: ObservableList<Event> = ObservableArrayList<Event>()
     val itemBinding: ItemBinding<Event> = ItemBinding.of(BR.item, R.layout.item_news)
 
-    override fun onStart() {
-        super.onStart()
+    override fun init() {
         loadNewsEvent(account = UserConfig.user.get()?.login.toString(), page = 0)
     }
 
@@ -33,25 +32,12 @@ class NewsViewModel(application: Application) : BaseViewModel(application) {
                 .compose(schedulersTransformer())
                 .compose(exceptionTransformer())
                 .doOnSubscribe {
-
+                    showLoading()
                 }
-                .subscribe({
+                .subscribe {
+                    showContent()
                     Logger.i(toJson(it))
                     items.addAll(it)
-                }, {
-
-                }, {
-
-                })
-    }
-
-    override fun onCreate() {
-        super.onCreate()
-        Logger.i("onCreate")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Logger.i("onDestroy")
+                }
     }
 }
