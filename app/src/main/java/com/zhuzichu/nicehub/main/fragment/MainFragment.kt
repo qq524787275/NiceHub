@@ -50,7 +50,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
         fragments.add(ProfileFragment())
 
         content.offscreenPageLimit = navigationController.itemCount
-        content.adapter = NiceViewPagerAdapter(getBaseActivity().supportFragmentManager, fragments)
+        content.adapter = NiceViewPagerAdapter(childFragmentManager, fragments)
 
         navigationController.setupWithViewPager(content)
     }

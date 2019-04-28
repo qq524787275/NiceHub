@@ -1,0 +1,43 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml:2:1-9:12
+INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml:2:1-9:12
+INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml:2:1-9:12
+INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml:2:1-9:12
+INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml:2:1-9:12
+INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml:2:1-9:12
+INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml:2:1-9:12
+	package
+		ADDED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml:3:5-36
+		INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml
+		INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml
+		ADDED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml:2:1-9:12
+		INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml
+		ADDED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml:2:1-9:12
+		INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml:5:5-79
+	android:name
+		ADDED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml:5:22-76
+application
+ADDED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml:6:5-7:19
+uses-sdk
+INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml
+INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml
+INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml
+INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml
+		ADDED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml
+		INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml
+		ADDED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml
+		INJECTED from D:\AndroidProjects\NiceHub\IMLib\src\main\AndroidManifest.xml

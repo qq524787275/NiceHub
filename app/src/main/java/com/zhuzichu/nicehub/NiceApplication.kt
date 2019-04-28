@@ -1,9 +1,12 @@
 package com.zhuzichu.nicehub
 
 import android.content.Context
+import android.content.Intent
+import android.os.Build
 import androidx.multidex.MultiDex
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
+import com.zhangwuji.im.imcore.service.IMService
 import com.zhuzichu.mvvm.App
 import com.zhuzichu.mvvm.crash.CaocConfig
 import com.zhuzichu.nicehub.main.activity.MainActivity
@@ -19,6 +22,19 @@ class NiceApplication : App() {
 
         //初始化全局异常崩溃
         initCrash()
+
+        startIMService()
+    }
+
+    private fun startIMService() {
+        Logger.i("start IMService")
+        val intent = Intent()
+        intent.setClass(this, IMService::class.java!!)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(intent)
+        } else {
+            startService(intent)
+        }
     }
 
     override fun attachBaseContext(base: Context?) {

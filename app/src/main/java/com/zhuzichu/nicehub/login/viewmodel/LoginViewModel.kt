@@ -5,6 +5,9 @@ import android.app.Application
 import android.view.View
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.MutableLiveData
+import com.orhanobut.logger.Logger
+import com.zhangwuji.helper.ApiAction
+import com.zhangwuji.im.server.network.BaseAction
 import com.zhuzichu.mvvm.base.BaseViewModel
 import com.zhuzichu.mvvm.binding.viewadapter.command.BindingAction
 import com.zhuzichu.mvvm.binding.viewadapter.command.BindingCommand
@@ -18,7 +21,6 @@ import com.zhuzichu.mvvm.utils.bindToLifecycle
 import com.zhuzichu.mvvm.utils.exceptionTransformer
 import com.zhuzichu.mvvm.utils.schedulersTransformer
 import com.zhuzichu.nicehub.main.activity.MainActivity
-import okhttp3.Credentials
 
 /**
  * Created by wb.zhuzichu18 on 2019/1/17.
@@ -52,8 +54,25 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             return@BindingAction
         }
         uc.showPasswordError.value = false
-        val token = Credentials.basic(username.value, password.value)
-        doLogin(token)
+
+        val apiAction = ApiAction(getApplication())
+        showLoadingDialog()
+        apiAction.UserLogin(username.value, password.value, object : BaseAction.ResultCallback<String>() {
+            override fun onSuccess(t: String?) {
+                t?.let { Logger.i(it) }
+                val options = ActivityOptionsCompat.makeCustomAnimation(context, android.R.anim.fade_in, android.R.anim.fade_out).toBundle()
+                startActivity(clz = MainActivity::class.java, isPop = true, options = options)
+//                hideDialog()
+            }
+
+            override fun onError(errString: String?) {
+                errString?.let { Logger.i(errString) }
+//                hideDialog()
+            }
+        })
+
+//        val token = Credentials.basic(username.value, password.value)
+//        doLogin(token)
     })
 
     val en = BindingCommand<View>(BindingAction {
