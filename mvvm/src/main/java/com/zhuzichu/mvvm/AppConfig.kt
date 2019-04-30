@@ -6,6 +6,7 @@ object AppConfig {
 
     val GITHUB_API_BASE_URL = "https://api.github.com/"
 
+    val IM_LOGINSERVER = "http://im.b56.cn:8080"
 
 
     val HTTP_TIME_OUT = 32 * 1000

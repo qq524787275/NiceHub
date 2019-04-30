@@ -24,12 +24,10 @@ public class MyLibEventBusIndex implements SubscriberInfoIndex {
                     com.zhangwuji.im.imcore.event.RefreshHistoryMsgEvent.class, ThreadMode.BACKGROUND),
         }));
 
-        putIndex(new SimpleSubscriberInfo(com.zhangwuji.im.imcore.service.IMService.class, true,
+        putIndex(new SimpleSubscriberInfo(com.zhangwuji.im.imcore.manager.IMReconnectManager.class, true,
                 new SubscriberMethodInfo[] {
-            new SubscriberMethodInfo("onEvent", com.zhangwuji.im.imcore.event.PriorityEvent.class, ThreadMode.POSTING,
-                    10, false),
-            new SubscriberMethodInfo("onEvent", com.zhangwuji.im.imcore.event.LoginEvent.class, ThreadMode.POSTING, 10,
-                    false),
+            new SubscriberMethodInfo("onUserEvent", com.zhangwuji.im.imcore.event.SocketEvent.class, ThreadMode.MAIN),
+            new SubscriberMethodInfo("onUserEvent", com.zhangwuji.im.imcore.event.LoginEvent.class, ThreadMode.MAIN),
         }));
 
         putIndex(new SimpleSubscriberInfo(com.zhangwuji.im.imcore.manager.IMGroupManager.class, true,
@@ -45,10 +43,12 @@ public class MyLibEventBusIndex implements SubscriberInfoIndex {
                     ThreadMode.MAIN),
         }));
 
-        putIndex(new SimpleSubscriberInfo(com.zhangwuji.im.imcore.manager.IMReconnectManager.class, true,
+        putIndex(new SimpleSubscriberInfo(com.zhangwuji.im.imcore.service.IMService.class, true,
                 new SubscriberMethodInfo[] {
-            new SubscriberMethodInfo("onUserEvent", com.zhangwuji.im.imcore.event.SocketEvent.class, ThreadMode.MAIN),
-            new SubscriberMethodInfo("onUserEvent", com.zhangwuji.im.imcore.event.LoginEvent.class, ThreadMode.MAIN),
+            new SubscriberMethodInfo("onEvent", com.zhangwuji.im.imcore.event.PriorityEvent.class, ThreadMode.POSTING,
+                    10, false),
+            new SubscriberMethodInfo("onEvent", com.zhangwuji.im.imcore.event.LoginEvent.class, ThreadMode.POSTING, 10,
+                    false),
         }));
 
     }

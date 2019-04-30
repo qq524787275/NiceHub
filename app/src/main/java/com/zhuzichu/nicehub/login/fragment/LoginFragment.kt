@@ -1,6 +1,11 @@
 package com.zhuzichu.nicehub.login.fragment
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import com.orhanobut.logger.Logger
 import com.zhuzichu.mvvm.base.BaseFragment
 import com.zhuzichu.mvvm.global.language.LangConfig
 import com.zhuzichu.mvvm.global.theme.ThemeConfig
@@ -39,5 +44,25 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
                 layoutPassword.isErrorEnabled = false
             }
         })
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Logger.i("zzc----------onCreate")
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        Logger.i("zzc----------onCreateView")
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onDestroyView() {
+        Logger.i("zzc----------onDestroyView")
+        super.onDestroyView()
+    }
+
+    override fun onDestroy() {
+        Logger.i("zzc----------onDestroy")
+        super.onDestroy()
     }
 }

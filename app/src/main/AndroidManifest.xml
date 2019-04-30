@@ -25,6 +25,11 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name="com.zhangwuji.im.imcore.service.IMService"
+            android:exported="false" />
+        <service android:name="com.zhangwuji.im.imcore.service.LoadImageService" />
+
         <activity
             android:name="com.zhuzichu.nicehub.main.activity.MainActivity"
             android:launchMode="singleTop" />

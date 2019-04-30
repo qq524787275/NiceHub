@@ -1,9 +1,9 @@
 package com.zhuzichu.mvvm.base
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity
 import com.zhuzichu.mvvm.R
 import kotlinx.android.synthetic.main.activity_base.*
 
@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_base.*
  * Created by wb.zhuzichu18 on 2019/1/15.
  */
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : RxAppCompatActivity() {
     lateinit var mNavController: NavController
     abstract fun setNavGraph(): Int
 

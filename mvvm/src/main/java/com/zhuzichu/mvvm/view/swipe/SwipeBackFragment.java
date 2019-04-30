@@ -33,9 +33,9 @@ public abstract class SwipeBackFragment<V extends ViewDataBinding, VM extends Ba
         super.onAttach(activity);
     }
 
-    @org.jetbrains.annotations.Nullable
+    @Nullable
     @Override
-    public View onCreateView(@NotNull LayoutInflater inflater, @org.jetbrains.annotations.Nullable ViewGroup container, @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NotNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
         return attachToSwipeBack(view);
     }

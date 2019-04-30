@@ -4,6 +4,7 @@ class En : Lang() {
     override var user_name: String = "Username"
     override var password: String = "Password"
     override var login: String = "Login"
+    override var regist: String = "Regist"
     override var login_in_browser: String = "LOGIN WITH BROWSER"
     override var oauth_tip: String = "Login using your default browser(OAuth)"
     override var user_name_warning: String = "Invalid username!"

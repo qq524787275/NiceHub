@@ -15,18 +15,30 @@
         <variable
             name="theme"
             type="com.zhuzichu.mvvm.global.theme.ThemeConfig" />
+
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@{theme.windowBackgroud}"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="50dp"
+            android:src="@mipmap/login_img" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:hint="@{lang.user_name}">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -42,6 +54,8 @@
             android:id="@+id/layoutPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:hint="@{lang.password}"
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="?colorAccent">
@@ -57,24 +71,28 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="36dp"
+            android:background="#03A9F4"
             android:text="@{lang.login}"
+            android:textColor="@android:color/white"
             app:onClickCommand="@{viewModel.login}" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="中文"
-            android:textColor="@{theme.textColorPrimary}"
-            app:onClickCommand="@{viewModel.zh}" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="英文"
-            android:textColor="@{theme.textColorPrimary}"
-            app:onClickCommand="@{viewModel.en}" />
-
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="36dp"
+            android:background="#4CAF50"
+            android:text="@{lang.regist}"
+            android:textColor="@android:color/white"
+            app:onClickCommand="@{viewModel.regist}" />
 
     </LinearLayout>
 </layout>

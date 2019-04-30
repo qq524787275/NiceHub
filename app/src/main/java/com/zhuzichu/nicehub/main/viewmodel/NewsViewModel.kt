@@ -7,7 +7,6 @@ import androidx.databinding.ObservableList
 import com.orhanobut.logger.Logger
 import com.zhuzichu.mvvm.base.BaseViewModel
 import com.zhuzichu.mvvm.data.model.Event
-import com.zhuzichu.mvvm.global.user.UserConfig
 import com.zhuzichu.mvvm.utils.bindToLifecycle
 import com.zhuzichu.mvvm.utils.exceptionTransformer
 import com.zhuzichu.mvvm.utils.schedulersTransformer
@@ -22,7 +21,7 @@ class NewsViewModel(application: Application) : BaseViewModel(application) {
     val itemBinding: ItemBinding<Event> = ItemBinding.of(BR.item, R.layout.item_news)
 
     override fun init() {
-        loadNewsEvent(account = UserConfig.user.get()?.login.toString(), page = 0)
+//        loadNewsEvent(account = UserConfig.user.get()?.login.toString(), page = 0)
     }
 
     @SuppressLint("CheckResult")

@@ -5,21 +5,23 @@ import android.app.Application
 import android.view.View
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.MutableLiveData
-import com.orhanobut.logger.Logger
-import com.zhangwuji.helper.ApiAction
-import com.zhangwuji.im.server.network.BaseAction
+import com.zhangwuji.helper.LoginInfoSp
+import com.zhangwuji.im.utils.CommonUtil
 import com.zhuzichu.mvvm.base.BaseViewModel
 import com.zhuzichu.mvvm.binding.viewadapter.command.BindingAction
 import com.zhuzichu.mvvm.binding.viewadapter.command.BindingCommand
+import com.zhuzichu.mvvm.bus.RxBus
 import com.zhuzichu.mvvm.bus.event.SingleLiveEvent
 import com.zhuzichu.mvvm.global.language.En
 import com.zhuzichu.mvvm.global.language.LangConfig
 import com.zhuzichu.mvvm.global.language.Zh
-import com.zhuzichu.mvvm.global.user.UserConfig
-import com.zhuzichu.mvvm.http.model.AuthRequestModel
 import com.zhuzichu.mvvm.utils.bindToLifecycle
 import com.zhuzichu.mvvm.utils.exceptionTransformer
 import com.zhuzichu.mvvm.utils.schedulersTransformer
+import com.zhuzichu.mvvm.utils.toast
+import com.zhuzichu.nicehub.R
+import com.zhuzichu.nicehub.config.UrlConstant
+import com.zhuzichu.nicehub.login.event.OnLoginEvent
 import com.zhuzichu.nicehub.main.activity.MainActivity
 
 /**
@@ -37,11 +39,23 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
 
     var uc = UIChangeObservable()
 
-    override fun onStart() {
-        super.onStart()
-        username.value = "qq524787275"
-        password.value = "zhuzichu520"
+    init {
+        username.value = "18229858146"
+        password.value = "7711451"
     }
+
+    val en = BindingCommand<View>(BindingAction {
+        LangConfig.initLang(En())
+    })
+
+    val zh = BindingCommand<View>(BindingAction {
+        LangConfig.initLang(Zh())
+    })
+
+    val regist = BindingCommand<View>(BindingAction {
+        toast("注册")
+        startFragment(R.id.registFragment)
+    })
 
     val login = BindingCommand<View>(BindingAction {
         if (username.value.isNullOrBlank()) {
@@ -55,39 +69,17 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
         }
         uc.showPasswordError.value = false
 
-        val apiAction = ApiAction(getApplication())
-        showLoadingDialog()
-        apiAction.UserLogin(username.value, password.value, object : BaseAction.ResultCallback<String>() {
-            override fun onSuccess(t: String?) {
-                t?.let { Logger.i(it) }
-                val options = ActivityOptionsCompat.makeCustomAnimation(context, android.R.anim.fade_in, android.R.anim.fade_out).toBundle()
-                startActivity(clz = MainActivity::class.java, isPop = true, options = options)
-//                hideDialog()
-            }
-
-            override fun onError(errString: String?) {
-                errString?.let { Logger.i(errString) }
-//                hideDialog()
-            }
-        })
-
-//        val token = Credentials.basic(username.value, password.value)
-//        doLogin(token)
+        doUserLogin(username.value!!, CommonUtil.md5(password.value!!).toLowerCase())
     })
 
-    val en = BindingCommand<View>(BindingAction {
-        LangConfig.initLang(En())
-    })
-
-    val zh = BindingCommand<View>(BindingAction {
-        LangConfig.initLang(Zh())
-    })
-
-
+    /**
+     *
+     * @param username String
+     * @param password String
+     */
     @SuppressLint("CheckResult")
-    private fun doLogin(token: String) {
-        val authRequestModel = AuthRequestModel.generate()
-        getLoginService(token).authorizations(authRequestModel)
+    private fun doUserLogin(username: String, password: String) {
+        getIMService().userLogin(username, password)
                 .compose(bindToLifecycle(getLifecycleProvider()))
                 .compose(schedulersTransformer())
                 .compose(exceptionTransformer())
@@ -95,29 +87,17 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
                     showLoadingDialog()
                 }
                 .subscribe({
-                    UserConfig.basecToken.set(it)
-                    doGetUser(it.token)
+                    toast(it.data.toString())
+                    val data = it.data
+                    LoginInfoSp.instance().setLoginInfo(username, password, data.token, data.userinfo.peerId)
+                    RxBus.default.post(OnLoginEvent(UrlConstant.appid, data.userinfo.peerId, username, data.token))
+                    val options = ActivityOptionsCompat.makeCustomAnimation(context, android.R.anim.fade_in, android.R.anim.fade_out).toBundle()
+                    startActivity(clz = MainActivity::class.java, isPop = true, options = options)
+                    hideDialog()
                 }, {
                     handleThrowable(it)
                     hideDialog()
                 }, {
-                })
-    }
-
-    @SuppressLint("CheckResult")
-    private fun doGetUser(token: String?) {
-        getUserService(token).getPersonInfo(false)
-                .compose(bindToLifecycle(getLifecycleProvider()))
-                .compose(schedulersTransformer())
-                .compose(exceptionTransformer())
-                .subscribe({
-                    UserConfig.user.set(it)
-                    val options = ActivityOptionsCompat.makeCustomAnimation(context, android.R.anim.fade_in, android.R.anim.fade_out).toBundle()
-                    startActivity(clz = MainActivity::class.java, isPop = true, options = options)
-                }, {
-                    hideDialog()
-                }, {
-                    hideDialog()
                 })
     }
 }

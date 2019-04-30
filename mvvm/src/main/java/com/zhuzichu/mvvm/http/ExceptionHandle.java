@@ -26,10 +26,9 @@ public class ExceptionHandle {
     private static final int SERVICE_UNAVAILABLE = 503;
 
     public static ResponseThrowable handleException(Throwable e) {
-        ResponseThrowable ex;
+        ResponseThrowable ex = new ResponseThrowable();
         if (e instanceof HttpException) {
             HttpException httpException = (HttpException) e;
-            ex = new ResponseThrowable(e, ERROR.HTTP_ERROR);
             switch (httpException.code()) {
                 case UNAUTHORIZED:
                     ex.msg = "操作未授权";
@@ -57,31 +56,28 @@ public class ExceptionHandle {
         } else if (e instanceof JsonParseException
                 || e instanceof JSONException
                 || e instanceof ParseException || e instanceof MalformedJsonException) {
-            ex = new ResponseThrowable(e, ERROR.PARSE_ERROR);
             ex.msg = "解析错误";
             return ex;
         } else if (e instanceof ConnectException) {
-            ex = new ResponseThrowable(e, ERROR.NETWORD_ERROR);
             ex.msg = "连接失败";
             return ex;
         } else if (e instanceof javax.net.ssl.SSLException) {
-            ex = new ResponseThrowable(e, ERROR.SSL_ERROR);
             ex.msg = "证书验证失败";
             return ex;
         } else if (e instanceof ConnectTimeoutException) {
-            ex = new ResponseThrowable(e, ERROR.TIMEOUT_ERROR);
             ex.msg = "连接超时";
             return ex;
         } else if (e instanceof java.net.SocketTimeoutException) {
-            ex = new ResponseThrowable(e, ERROR.TIMEOUT_ERROR);
             ex.msg = "连接超时";
             return ex;
         } else if (e instanceof java.net.UnknownHostException) {
-            ex = new ResponseThrowable(e, ERROR.TIMEOUT_ERROR);
             ex.msg = "主机地址未知";
             return ex;
-        } else {
-            ex = new ResponseThrowable(e, ERROR.UNKNOWN);
+        } else if  (e instanceof com.zhuzichu.mvvm.http.ResponseThrowable){
+            ex.msg=((com.zhuzichu.mvvm.http.ResponseThrowable) e).msg;
+            return ex;
+        }
+        else {
             ex.msg = "未知错误";
             return ex;
         }
@@ -92,6 +88,10 @@ public class ExceptionHandle {
      * 约定异常 这个具体规则需要与服务端或者领导商讨定义
      */
     class ERROR {
+        /**
+         * 密码错误
+         */
+        public static final int PASSWORD_ERROR = 100;
         /**
          * 未知错误
          */

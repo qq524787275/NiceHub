@@ -4,6 +4,7 @@ abstract class Lang{
     abstract var user_name: String
     abstract var password: String
     abstract var login: String
+    abstract var regist: String
     abstract var login_in_browser: String
     abstract var oauth_tip: String
     abstract var user_name_warning: String

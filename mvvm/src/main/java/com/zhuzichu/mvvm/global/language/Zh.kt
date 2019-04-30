@@ -3,7 +3,8 @@ package com.zhuzichu.mvvm.global.language
 class Zh : Lang() {
     override var user_name: String = "用户名"
     override var password: String = "密码"
-    override var login: String = "登录"
+    override var login: String = "登 录"
+    override var regist : String = "注 册"
     override var login_in_browser: String = "在浏览器中登录"
     override var oauth_tip: String = "使用您的默认浏览器登录(OAuth)"
     override var user_name_warning: String = "用户名不可用！"

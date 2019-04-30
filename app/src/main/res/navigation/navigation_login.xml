@@ -3,11 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_navigation"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/loginFragment"
+    tools:ignore="UnusedNavigation">
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.zhuzichu.nicehub.login.fragment.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_registFragment"
+            app:destination="@id/registFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registFragment"
+        android:name="com.zhuzichu.nicehub.login.fragment.RegistFragment"
+        android:label="RegistFragment" />
 </navigation>
