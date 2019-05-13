@@ -3,7 +3,6 @@ package com.zhuzichu.nicehub.login.viewmodel
 import android.annotation.SuppressLint
 import android.app.Application
 import android.view.View
-import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.MutableLiveData
 import com.zhangwuji.helper.LoginInfoSp
 import com.zhangwuji.im.utils.CommonUtil
@@ -22,7 +21,6 @@ import com.zhuzichu.mvvm.utils.toast
 import com.zhuzichu.nicehub.R
 import com.zhuzichu.nicehub.config.UrlConstant
 import com.zhuzichu.nicehub.login.event.OnLoginEvent
-import com.zhuzichu.nicehub.main.activity.MainActivity
 
 /**
  * Created by wb.zhuzichu18 on 2019/1/17.
@@ -91,8 +89,6 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
                     val data = it.data
                     LoginInfoSp.instance().setLoginInfo(username, password, data.token, data.userinfo.peerId)
                     RxBus.default.post(OnLoginEvent(UrlConstant.appid, data.userinfo.peerId, username, data.token))
-                    val options = ActivityOptionsCompat.makeCustomAnimation(context, android.R.anim.fade_in, android.R.anim.fade_out).toBundle()
-                    startActivity(clz = MainActivity::class.java, isPop = true, options = options)
                     hideDialog()
                 }, {
                     handleThrowable(it)

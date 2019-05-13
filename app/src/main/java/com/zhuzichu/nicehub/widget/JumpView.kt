@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.view.isVisible
 import com.zhuzichu.mvvm.base.IBaseView
 import com.zhuzichu.mvvm.utils.schedulersTransformer
 import com.zhuzichu.nicehub.R
@@ -36,8 +37,8 @@ class JumpView @JvmOverloads constructor(
         }
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onCreate() {
+        super.onCreate()
         subscribe = Observable.interval(
                 period.toLong(), TimeUnit.SECONDS)
                 .compose(schedulersTransformer())
@@ -48,7 +49,7 @@ class JumpView @JvmOverloads constructor(
                 .subscribe {
                     text = String.format(s, time.toLong().minus(it as Long) - 1)
                     if (it == time.toLong() - 1) {
-                        if (::listener.isInitialized) {
+                        if (::listener.isInitialized && !isVisible) {
                             listener()
                         }
                     }

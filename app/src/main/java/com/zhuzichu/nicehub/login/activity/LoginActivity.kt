@@ -1,6 +1,7 @@
 package com.zhuzichu.nicehub.login.activity
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -36,6 +37,15 @@ class LoginActivity : BaseActivity() {
     private var loginSuccess = false
     private var firstLogin = true
     private var autoLogin = true
+
+    companion object {
+        fun start(context: Context) {
+            val intent = Intent()
+            intent.setClass(context, LoginActivity::class.java)
+            context.startActivity(intent)
+        }
+    }
+
 
     private val imServiceConnector = object : IMServiceConnector() {
         override fun onServiceDisconnected() {
@@ -146,6 +156,13 @@ class LoginActivity : BaseActivity() {
         }
 
         imServiceConnector.connect(this@LoginActivity)
+
+        initAutoLogin()
+    }
+
+    private fun initAutoLogin() {
+
+
     }
 
     override fun onDestroy() {
@@ -193,5 +210,4 @@ class LoginActivity : BaseActivity() {
     private fun onSocketFailure(event: SocketEvent) {
         Logger.i("登录socket失败")
     }
-
 }

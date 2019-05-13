@@ -1,5 +1,6 @@
 package com.zhuzichu.mvvm.base
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -18,6 +19,7 @@ abstract class BaseActivity : RxAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initContainer(savedInstanceState)
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
     private fun initContainer(savedInstanceState: Bundle?) {

@@ -17,7 +17,10 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name="com.zhuzichu.nicehub.launch.activity.LaunchActivity"
-            android:theme="@style/LaunchTheme">
+            android:theme="@style/LaunchTheme" />
+        <activity
+            android:name="com.zhuzichu.nicehub.launch.activity.LaunchEmptyActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,12 +33,8 @@
             android:exported="false" />
         <service android:name="com.zhangwuji.im.imcore.service.LoadImageService" />
 
-        <activity
-            android:name="com.zhuzichu.nicehub.main.activity.MainActivity"
-            android:launchMode="singleTop" />
-        <activity
-            android:name="com.zhuzichu.nicehub.login.activity.LoginActivity"
-            android:launchMode="singleTop" />
+        <activity android:name="com.zhuzichu.nicehub.main.activity.MainActivity" />
+        <activity android:name="com.zhuzichu.nicehub.login.activity.LoginActivity" />
     </application>
 
 </manifest>

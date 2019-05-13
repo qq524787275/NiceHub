@@ -29,4 +29,5 @@ class RegistViewModel(application: Application) : BaseViewModel(application) {
     val sendCode = BindingCommand<View>(BindingAction {
         toast("sendCode")
     })
+
 }
